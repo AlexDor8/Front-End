@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BasketballCoach</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="loginbutton">Login</string>
+    <string name="registerbutton">Registrarse</string>
+</resources>
