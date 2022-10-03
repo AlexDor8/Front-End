@@ -4,4 +4,5 @@
     <string name="password">Contraseña</string>
     <string name="loginbutton">Login</string>
     <string name="registerbutton">Registrarse</string>
+    <string name="aboutusbutton">About us</string>
 </resources>
