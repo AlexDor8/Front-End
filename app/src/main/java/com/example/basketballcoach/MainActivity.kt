@@ -12,11 +12,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         var username: TextView = findViewById(R.id.username);
+        var password: TextView = findViewById(R.id.password);
+
+        data class Usuario(var username: TextView, var password: TextView);
+
         val login: Button = findViewById(R.id.botonlogin);
         val register: Button = findViewById(R.id.botonregistro);
+        val aboutus: Button = findViewById(R.id.botonaboutus);
+
 
         register.setOnClickListener {
             val intent: Intent = Intent(this,Register::class.java);
+            startActivity(intent);
+        }
+
+        aboutus.setOnClickListener {
+            val intent: Intent = Intent(this,AboutUs::class.java);
             startActivity(intent);
         }
     }
