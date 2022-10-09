@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
         var username: TextView = findViewById(R.id.username);
         var password: TextView = findViewById(R.id.password);
 
-        data class Usuario(var username: TextView, var password: TextView);
 
         val login: Button = findViewById(R.id.botonlogin);
         val register: Button = findViewById(R.id.botonregistro);

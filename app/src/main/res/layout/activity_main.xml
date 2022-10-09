@@ -99,8 +99,8 @@
 
     <ImageButton
         android:id="@+id/twitter"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_social"
@@ -108,16 +108,16 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.237"
         app:layout_constraintStart_toEndOf="@+id/google"
         app:layout_constraintTop_toBottomOf="@+id/botonregistro"
-        app:layout_constraintVertical_bias="0.141"
+        app:layout_constraintVertical_bias="0.142"
         app:srcCompat="@drawable/gorjeo" />
 
     <ImageButton
         android:id="@+id/facebook"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
@@ -126,16 +126,16 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintHorizontal_bias="0.262"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botonregistro"
-        app:layout_constraintVertical_bias="0.141"
+        app:layout_constraintVertical_bias="0.142"
         app:srcCompat="@drawable/facebook" />
 
     <ImageButton
         android:id="@+id/google"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
@@ -144,10 +144,10 @@
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toEndOf="@+id/facebook"
         app:layout_constraintTop_toBottomOf="@+id/botonregistro"
-        app:layout_constraintVertical_bias="0.141"
+        app:layout_constraintVertical_bias="0.142"
         app:srcCompat="@drawable/google" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
