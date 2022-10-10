@@ -18,6 +18,6 @@ class IntegrantesViewHolder(view:View):RecyclerView.ViewHolder(view) {
         nombre.text = integrantes.nombreApellidos
         especializacion.text = integrantes.especializacion
         informacion.text = integrantes.informacionIntegrante
-        foto.setImageResource(R.drawable.avatar)
+        foto.setImageResource(integrantes.foto)
     }
 }

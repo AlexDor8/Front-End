@@ -13,12 +13,12 @@ class AboutUs : AppCompatActivity() {
             nombreApellidos = "Alejandro Dorado Casado",
             especializacion = "Front End",
             informacionIntegrante = "Gran pasión por la programación \n y por el arte digital.",
-            foto = R.drawable.avatar
+            foto = R.drawable.foto_alex
         ),
         Integrantes(
             nombreApellidos = "Kilian Herrada Fernandez",
             especializacion = "Back End",
-            informacionIntegrante = "Gran pasión por la programación \n y por el arte digital.",
+            informacionIntegrante = "Gran interés por el código abierto \n y por mejorar como programador.",
             foto = R.drawable.avatar
         ),
         Integrantes(
