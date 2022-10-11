@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:textSize="15dp"
+        android:textSize="13dp"
         tools:text = "Gran pasión por la programación y por el arte digital."
         app:layout_constraintTop_toBottomOf="@+id/especializacion"
         app:layout_constraintStart_toEndOf="@+id/fotoIntegrante">

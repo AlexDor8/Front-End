@@ -12,19 +12,20 @@ class AboutUs : AppCompatActivity() {
         Integrantes(
             nombreApellidos = "Alejandro Dorado Casado",
             especializacion = "Front End",
-            informacionIntegrante = "Gran pasión por la programación \n y por el arte digital.",
+            informacionIntegrante = "Gran pasión por la programación \ny por el arte digital.",
             foto = R.drawable.foto_alex
         ),
         Integrantes(
-            nombreApellidos = "Kilian Herrada Fernandez",
+            nombreApellidos = "Kilian Herrada Fernández",
             especializacion = "Back End",
-            informacionIntegrante = "Gran interés por el código abierto \n y por mejorar como programador.",
-            foto = R.drawable.avatar
+            informacionIntegrante = "Interés por el código abierto y por \nmejorar como programador.",
+            foto = R.drawable.foto_kilian
         ),
         Integrantes(
-            nombreApellidos = "Tige David Ral Ramirez",
-            especializacion = "Informe tecnico",
-            informacionIntegrante = "Gran pasión por la programación \n y por el arte digital.",
+            nombreApellidos = "Tigé David Ral Ramirez",
+            especializacion = "Informe técnico",
+            informacionIntegrante = "Me gusta expresar mi creatividad \na través del desarrollo de " +
+                    "software.\nY me satisface resolver problemas\nlógicos.",
             foto = R.drawable.avatar
         )
     )
@@ -36,9 +37,9 @@ class AboutUs : AppCompatActivity() {
         inicializacionRecyclerView()
     }
 
-    private fun inicializacionRecyclerView(){
+    private fun inicializacionRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerIntegrantes)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter= IntegrantesAdapter(listaIntegrantes)
+        recyclerView.adapter = IntegrantesAdapter(listaIntegrantes)
     }
 }
