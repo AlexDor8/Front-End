@@ -26,7 +26,7 @@ class AboutUs : AppCompatActivity() {
             especializacion = "Informe técnico",
             informacionIntegrante = "Me gusta expresar mi creatividad \na través del desarrollo de " +
                     "software.\nY me satisface resolver problemas\nlógicos.",
-            foto = R.drawable.avatar
+            foto = R.drawable.foto_tige
         )
     )
 
