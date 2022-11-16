@@ -2,17 +2,21 @@ package com.example.basketballcoach
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basketballcoach.adapter.IntegrantesAdapter
 import com.example.basketballcoach.retrofit.APIService
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
 class AboutUs : AppCompatActivity() {
 
-    var listaIntegrantes = listOf<Integrantes>(
+    var listaIntegrantes = mutableListOf<Integrantes>(
         Integrantes(
             nombreApellidos = "Alejandro Dorado Casado",
             especializacion = "Front End",
@@ -33,8 +37,8 @@ class AboutUs : AppCompatActivity() {
             foto = R.drawable.foto_tige
         )
     )
-
-
+    val recyclerView = findViewById<RecyclerView>(R.id.recyclerIntegrantes)
+    private lateinit var integrantesRvAdapter: IntegrantesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,14 +47,25 @@ class AboutUs : AppCompatActivity() {
     }
 
     private fun inicializacionRecyclerView() {
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerIntegrantes)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = IntegrantesAdapter(listaIntegrantes)
+        integrantesRvAdapter = IntegrantesAdapter(listaIntegrantes)
+        recyclerView.adapter = integrantesRvAdapter
     }
 
     private fun conexion() {
-        val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8080/").addConverterFactory(GsonConverterFactory.create()).build()
-        var respuesta = conexion.create(APIService::class.java).getUsuarios("")
+        lifecycleScope.launch(Dispatchers.Default) {
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:80/").addConverterFactory(GsonConverterFactory.create()).build()
+            withContext(Dispatchers.Main) {
+                var respuesta = conexion.create(APIService::class.java).getUsuarios("../php/integrantesGET.php")
+                if (respuesta.isSuccessful) {
+                    val nuevosIntegrantes = respuesta.body() ?: emptyList()
+                    listaIntegrantes.clear();
+                    listaIntegrantes.addAll(nuevosIntegrantes)
+                    integrantesRvAdapter.notifyDataSetChanged()
+                }
+            }
+        }
+
     }
 
 
