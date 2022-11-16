@@ -13,6 +13,7 @@
         android:id="@+id/fotoIntegrante"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:scaleType="centerInside"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         >
