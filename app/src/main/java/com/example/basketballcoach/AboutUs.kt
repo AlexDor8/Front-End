@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basketballcoach.adapter.IntegrantesAdapter
 import com.example.basketballcoach.retrofit.APIService
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -53,16 +54,19 @@ class AboutUs : AppCompatActivity() {
     }
 
     private fun conexion() {
-        lifecycleScope.launch(Dispatchers.Default) {
-            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:80/").addConverterFactory(GsonConverterFactory.create()).build()
-            withContext(Dispatchers.Main) {
-                var respuesta = conexion.create(APIService::class.java).getUsuarios("../php/integrantesGET.php")
-                if (respuesta.isSuccessful) {
-                    val nuevosIntegrantes = respuesta.body() ?: emptyList()
-                    listaIntegrantes.clear();
-                    listaIntegrantes.addAll(nuevosIntegrantes)
-                    integrantesRvAdapter.notifyDataSetChanged()
+        CoroutineScope(Dispatchers.IO).launch {
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2/").addConverterFactory(GsonConverterFactory.create()).build()
+            withContext(Dispatchers.Default) {
+                var respuesta = conexion.create(APIService::class.java).getUsuarios("php/integrantesGET.php")
+                withContext(Dispatchers.Main) {
+                    if (respuesta.isSuccessful) {
+                        val nuevosIntegrantes = respuesta.body() ?: emptyList()
+                        listaIntegrantes.clear();
+                        listaIntegrantes.addAll(nuevosIntegrantes)
+                        integrantesRvAdapter.notifyDataSetChanged()
+                    }
                 }
+
             }
         }
 
