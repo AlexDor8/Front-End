@@ -5,6 +5,10 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basketballcoach.adapter.IntegrantesAdapter
+import com.example.basketballcoach.retrofit.APIService
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 class AboutUs : AppCompatActivity() {
 
@@ -31,6 +35,7 @@ class AboutUs : AppCompatActivity() {
     )
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_us)
@@ -42,4 +47,12 @@ class AboutUs : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = IntegrantesAdapter(listaIntegrantes)
     }
+
+    private fun conexion() {
+        val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8080/").addConverterFactory(GsonConverterFactory.create()).build()
+        var respuesta = conexion.create(APIService::class.java).getUsuarios("")
+    }
+
+
+
 }
