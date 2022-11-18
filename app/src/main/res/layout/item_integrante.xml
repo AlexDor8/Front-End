@@ -5,6 +5,7 @@
     android:background="@drawable/button_rounded"
     android:padding="10dp"
     android:layout_marginBottom="12dp"
+    app:layout_constraintBottom_toBottomOf="@+id/searchViewIntegrantes"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -13,6 +14,7 @@
         android:id="@+id/fotoIntegrante"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        android:scaleType="centerInside"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         >

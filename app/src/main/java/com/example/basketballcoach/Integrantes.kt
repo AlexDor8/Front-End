@@ -6,5 +6,5 @@ data class Integrantes(
     val nombreApellidos: String,
     val especializacion: String,
     val informacionIntegrante: String,
-    val foto: Int
+    val foto: String
 )
