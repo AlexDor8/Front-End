@@ -18,18 +18,21 @@ class AboutUs : AppCompatActivity() {
 
     var listaIntegrantes = mutableListOf<Integrantes>(
         Integrantes(
+            id = 1,
             nombreApellidos = "Alejandro Dorado Casado",
             especializacion = "Front End",
             informacionIntegrante = "Gran pasión por la programación \ny por el arte digital.",
             foto = ""
         ),
         Integrantes(
+            id = 2,
             nombreApellidos = "Kilian Herrada Fernández",
             especializacion = "Back End",
             informacionIntegrante = "Interés por el código abierto y por \nmejorar como programador.",
             foto = ""
         ),
         Integrantes(
+            id = 3,
             nombreApellidos = "Tigé David Ral Ramirez",
             especializacion = "Informe técnico",
             informacionIntegrante = "Me gusta expresar mi creatividad \na través del desarrollo de " +
