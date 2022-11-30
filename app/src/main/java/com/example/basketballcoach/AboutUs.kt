@@ -64,13 +64,7 @@ class AboutUs : AppCompatActivity() {
                         listaIntegrantes.addAll(nuevosIntegrantes)
                         integrantesRvAdapter.notifyDataSetChanged()
                     }
-
-
             }
         }
-
     }
-
-
-
 }
