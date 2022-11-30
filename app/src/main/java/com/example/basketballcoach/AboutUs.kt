@@ -12,30 +12,29 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 class AboutUs : AppCompatActivity() {
 
     var listaIntegrantes = mutableListOf<Integrantes>(
         Integrantes(
             id = 1,
-            nombreApellidos = "Alejandro Dorado Casado",
+            nombre = "Alejandro Dorado Casado",
             especializacion = "Front End",
-            informacionIntegrante = "Gran pasión por la programación \ny por el arte digital.",
+            informacion = "Gran pasión por la programación \ny por el arte digital.",
             foto = ""
         ),
         Integrantes(
             id = 2,
-            nombreApellidos = "Kilian Herrada Fernández",
+            nombre = "Kilian Herrada Fernández",
             especializacion = "Back End",
-            informacionIntegrante = "Interés por el código abierto y por \nmejorar como programador.",
+            informacion = "Interés por el código abierto y por \nmejorar como programador.",
             foto = ""
         ),
         Integrantes(
             id = 3,
-            nombreApellidos = "Tigé David Ral Ramirez",
+            nombre = "Tigé David Ral Ramirez",
             especializacion = "Informe técnico",
-            informacionIntegrante = "Me gusta expresar mi creatividad \na través del desarrollo de " +
+            informacion = "Me gusta expresar mi creatividad \na través del desarrollo de " +
                     "software.\nY me satisface resolver problemas\nlógicos.",
             foto = ""
         )
@@ -58,8 +57,8 @@ class AboutUs : AppCompatActivity() {
 
     private fun conexion() {
         CoroutineScope(Dispatchers.IO).launch {
-            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2/").addConverterFactory(GsonConverterFactory.create()).build()
-                var respuesta = conexion.create(APIService::class.java).getUsuarios("php/integrantesGET.php")
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(GsonConverterFactory.create()).build()
+                var respuesta = conexion.create(APIService::class.java).getUsuarios("baloncesto/Integrantes")
                 withContext(Dispatchers.Main) {
                     if (respuesta.isSuccessful) {
                         val nuevosIntegrantes = respuesta.body() ?: emptyList()

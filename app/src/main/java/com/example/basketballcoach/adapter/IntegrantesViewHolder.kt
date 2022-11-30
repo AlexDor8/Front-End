@@ -5,10 +5,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.basketballcoach.Integrantes
 import com.example.basketballcoach.R
-import kotlin.coroutines.coroutineContext
 
 class IntegrantesViewHolder(view:View):RecyclerView.ViewHolder(view) {
 
@@ -18,9 +16,9 @@ class IntegrantesViewHolder(view:View):RecyclerView.ViewHolder(view) {
     var fotoIntegrante = view.findViewById<ImageView>(R.id.fotoIntegrante)
 
     fun itemPorListado(integrantes: Integrantes){
-        nombre.text = integrantes.nombreApellidos
+        nombre.text = integrantes.nombre
         especializacion.text = integrantes.especializacion
-        informacion.text = integrantes.informacionIntegrante
+        informacion.text = integrantes.informacion
         Glide.with(fotoIntegrante.context)
             .load(integrantes.foto)
             .into(fotoIntegrante);
