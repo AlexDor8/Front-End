@@ -2,6 +2,7 @@ package com.example.basketballcoach
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basketballcoach.adapter.IntegrantesAdapter
@@ -46,6 +47,7 @@ class AboutUs : AppCompatActivity() {
         setContentView(R.layout.activity_about_us)
         inicializacionRecyclerView()
         conexion()
+        buscarSearchView()
     }
 
     private fun inicializacionRecyclerView() {
@@ -66,6 +68,40 @@ class AboutUs : AppCompatActivity() {
                         listaIntegrantes.addAll(nuevosIntegrantes)
                         integrantesRvAdapter.notifyDataSetChanged()
                     }
+            }
+        }
+    }
+
+    private fun buscarSearchView() {
+        var searchView = findViewById<SearchView>(R.id.searchViewIntegrantes);
+        searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if(!query?.isNullOrEmpty()!!) {
+                    getUsuariosFiltroNombre(query);
+                }
+                return true;
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true;
+            }
+        }
+
+        )
+
+    }
+
+    private fun getUsuariosFiltroNombre(query:String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(GsonConverterFactory.create()).build()
+            var respuesta = conexion.create(APIService::class.java).getUsuarios("baloncesto/Integrantes/$query")
+            withContext(Dispatchers.Main) {
+                if (respuesta.isSuccessful) {
+                    val nuevosIntegrantes = respuesta.body() ?: emptyList()
+                    listaIntegrantes.clear();
+                    listaIntegrantes.addAll(nuevosIntegrantes)
+                    integrantesRvAdapter.notifyDataSetChanged()
+                }
             }
         }
     }
