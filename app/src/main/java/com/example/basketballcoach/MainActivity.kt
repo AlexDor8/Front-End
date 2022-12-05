@@ -11,11 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var username: TextView = findViewById(R.id.username);
-        var password: TextView = findViewById(R.id.password);
 
-
-        val login: Button = findViewById(R.id.botonlogin);
         val register: Button = findViewById(R.id.botonregistro);
         val aboutus: Button = findViewById(R.id.botonaboutus);
 
@@ -28,6 +24,19 @@ class MainActivity : AppCompatActivity() {
         aboutus.setOnClickListener {
             val intent: Intent = Intent(this,AboutUs::class.java);
             startActivity(intent);
+        }
+    }
+
+    private fun login() {
+        var username: TextView = findViewById(R.id.username);
+        var password: TextView = findViewById(R.id.password);
+        val login: Button = findViewById(R.id.botonlogin);
+
+        var nombreUsuario = username.text.toString()
+        var contraseña = password.text.toString()
+
+        login.setOnClickListener {
+
         }
     }
 }

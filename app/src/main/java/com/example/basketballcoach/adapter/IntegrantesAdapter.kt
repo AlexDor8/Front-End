@@ -3,7 +3,7 @@ package com.example.basketballcoach.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.basketballcoach.Integrantes
+import com.example.basketballcoach.model.Integrantes
 import com.example.basketballcoach.R
 
 class IntegrantesAdapter(val listaIntegrantes: List<Integrantes>) : RecyclerView.Adapter<IntegrantesViewHolder>(){

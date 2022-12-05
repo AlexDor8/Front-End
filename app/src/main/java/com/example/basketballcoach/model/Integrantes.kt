@@ -1,4 +1,4 @@
-package com.example.basketballcoach
+package com.example.basketballcoach.model
 
 data class Integrantes(
     val id: Int,
