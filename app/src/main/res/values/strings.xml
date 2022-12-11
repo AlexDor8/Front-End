@@ -5,4 +5,7 @@
     <string name="loginbutton">Login</string>
     <string name="registerbutton">Registrarse</string>
     <string name="aboutusbutton">About us</string>
+    <string name="repiteContraseña">Repite contraseña</string>
+    <string name="email">Correo electrónico</string>
+    <string name="fechaNacimiento">Fecha de nacimiento</string>
 </resources>

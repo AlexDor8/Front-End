@@ -4,9 +4,9 @@ import java.util.*
 
 data class Usuario(
     var nombre: String,
-    var correo: String,
     var contraseña: String,
-    var fechaNacimiento: Date
+    var correo: String,
+    var fechaNacimiento: String
 ) {
 
 
