@@ -42,9 +42,11 @@ class Register : AppCompatActivity() {
                 val interceptor = HttpLoggingInterceptor()
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
                 val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
-                val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
+                val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/")
+                    .addConverterFactory(
                     GsonConverterFactory.create()).client(client).build()
-                var respuesta = conexion.create(APIService::class.java).postRegister("baloncesto/CrearUsuario", Usuario(0, nombreUsuario, contrasena, mail, nacimiento) )
+                var respuesta = conexion.create(APIService::class.java)
+                    .postRegister("baloncesto/CrearUsuario", Usuario(0, nombreUsuario, contrasena, mail, nacimiento) )
                 withContext(Dispatchers.Main) {
                     if (respuesta.isSuccessful) {
                         println(respuesta.body())

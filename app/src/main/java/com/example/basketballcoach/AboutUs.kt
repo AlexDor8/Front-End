@@ -99,8 +99,10 @@ class AboutUs : AppCompatActivity() {
 
     private fun getUsuariosFiltroNombre(query:String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(GsonConverterFactory.create()).build()
-            var respuesta = conexion.create(APIService::class.java).getUsuarios("baloncesto/Integrantes/$query")
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/")
+                .addConverterFactory(GsonConverterFactory.create()).build()
+            var respuesta = conexion.create(APIService::class.java)
+                .getUsuarios("baloncesto/Integrantes/$query")
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     val nuevosIntegrantes = respuesta.body() ?: emptyList()
