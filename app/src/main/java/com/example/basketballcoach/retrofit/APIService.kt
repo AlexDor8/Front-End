@@ -15,5 +15,8 @@ interface APIService {
     suspend fun getUsuarios(@Url url: String): Response<List<Integrantes>>
 
     @POST
-    suspend fun postRegister(@Url url: String, @Body usuario: Usuario):Response<Usuario>
+    suspend fun postRegister(@Url url: String, @Body usuario: Usuario): Response<Usuario>
+
+    @POST
+    suspend fun postLogin(@Url url: String, nombreUsuario: String, contrasena: String): Response<Usuario>
 }
