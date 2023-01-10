@@ -3,8 +3,11 @@ package com.example.basketballcoach
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import com.example.basketballcoach.model.LoginInformation
 import com.example.basketballcoach.retrofit.APIService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,11 +23,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        login()
 
+        val login: Button = findViewById(R.id.botonlogin);
         val register: Button = findViewById(R.id.botonregistro);
         val aboutus: Button = findViewById(R.id.botonaboutus);
 
+        val username: TextView = findViewById(R.id.username);
+        val password: TextView = findViewById(R.id.password);
+
+
+
+
+        login.setOnClickListener {
+            val nombre: String = username.text.toString()
+            val contraseña: String = password.text.toString()
+            conexion(nombre, contraseña)
+        }
 
         register.setOnClickListener {
             val intent: Intent = Intent(this, Register::class.java);
@@ -37,20 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun login() {
-        var username: TextView = findViewById(R.id.username);
-        var password: TextView = findViewById(R.id.password);
-        val login: Button = findViewById(R.id.botonlogin);
-
-        var nombreUsuario = username.text.toString()
-        var contraseña = password.text.toString()
-
-        login.setOnClickListener {
-            conexion(nombreUsuario, contraseña)
-        }
-    }
-
-    private fun conexion(nombreUsuario: String, contrasena: String) {
+    private fun conexion(nombre: String, contrasena: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -59,11 +60,13 @@ class MainActivity : AppCompatActivity() {
                 .addConverterFactory(
                     GsonConverterFactory.create()
                 ).client(client).build()
-            var respuesta = conexion.create(APIService::class.java).postLogin("baloncesto/Login", nombreUsuario, contrasena)
+            var respuesta = conexion.create(APIService::class.java).postLogin("baloncesto/Login", LoginInformation(nombre, contrasena))
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     val usuario = respuesta.body()
+                    println("Te has logueado con exito")
                     println(usuario)
+                    Toast.makeText(applicationContext, "Te has logueado con éxito!", Toast.LENGTH_LONG).show();
                 }else {
                     respuesta.errorBody()?.string()
                     println("Error al loguearte. El usuario o la contraseña son incorrectos.")
