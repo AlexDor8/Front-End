@@ -37,7 +37,11 @@ class MainActivity : AppCompatActivity() {
         login.setOnClickListener {
             val nombre: String = username.text.toString()
             val contraseña: String = password.text.toString()
-            conexion(nombre, contraseña)
+            if (nombre.isEmpty() || contraseña.isEmpty()) {
+                Toast.makeText(applicationContext, "Los campos están vacíos", Toast.LENGTH_LONG).show();
+            }else {
+                conexion(nombre, contraseña)
+            }
         }
 
         register.setOnClickListener {
