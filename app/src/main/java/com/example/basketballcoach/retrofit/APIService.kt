@@ -1,10 +1,7 @@
 package com.example.basketballcoach.retrofit
 
 import android.util.JsonReader
-import com.example.basketballcoach.model.Feedback
-import com.example.basketballcoach.model.Integrantes
-import com.example.basketballcoach.model.LoginInformation
-import com.example.basketballcoach.model.Usuario
+import com.example.basketballcoach.model.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -21,5 +18,5 @@ interface APIService {
     suspend fun postRegister(@Url url: String, @Body usuario: Usuario): Response<Feedback>
 
     @POST
-    suspend fun postLogin(@Url url: String, @Body loginInformation: LoginInformation): Response<Usuario>
+    suspend fun postLogin(@Url url: String, @Body loginInformation: LoginInformation): Response<Boolean>
 }

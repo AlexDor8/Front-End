@@ -64,18 +64,25 @@ class MainActivity : AppCompatActivity() {
                 .addConverterFactory(
                     GsonConverterFactory.create()
                 ).client(client).build()
-            var respuesta = conexion.create(APIService::class.java).postLogin("baloncesto/Login", LoginInformation(nombre, contrasena))
+            var respuesta = conexion.create(APIService::class.java).postLogin("baloncesto/cLogin", LoginInformation(nombre, contrasena))
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
-                    val usuario = respuesta.body()
-                    println("Te has logueado con exito")
-                    println(usuario)
-                    Toast.makeText(applicationContext, "Te has logueado con éxito!", Toast.LENGTH_LONG).show();
+                    if(respuesta.body() == true) {
+                        println("Te has logueado con exito")
+                        Toast.makeText(applicationContext, "Te has logueado con éxito!", Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(applicationContext, "Error al loguearte.", Toast.LENGTH_LONG).show();
+                        println("Error al loguearte. El usuario o la contraseña son incorrectos.")
+                    }
                 }else {
                     respuesta.errorBody()?.string()
-                    println("Error al loguearte. El usuario o la contraseña son incorrectos.")
+
                 }
             }
         }
+    }
+
+    private fun datosUsuario() {
+
     }
 }

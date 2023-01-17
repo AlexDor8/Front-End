@@ -35,6 +35,7 @@ class Register : AppCompatActivity() {
 
         val registrarse: Button = findViewById(R.id.botonRegister)
 
+
         registrarse.setOnClickListener {
             val nombreUsuario = registerNombreUsuario.text.toString()
             val contrasena = password.text.toString()
@@ -42,27 +43,35 @@ class Register : AppCompatActivity() {
             val mail = email.text.toString()
             val nacimiento = fechaNacimiento.text.toString()
 
-            if (contrasena == repitePassword) {
-                CoroutineScope(Dispatchers.IO).launch {
-                    val interceptor = HttpLoggingInterceptor()
-                    interceptor.level = HttpLoggingInterceptor.Level.BODY
-                    val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
-                    val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/")
-                        .addConverterFactory(
-                            GsonConverterFactory.create()).client(client).build()
-                    var respuesta = conexion.create(APIService::class.java)
-                        .postRegister("baloncesto/CrearUsuario", Usuario(0, nombreUsuario, contrasena, mail, nacimiento) )
-                    withContext(Dispatchers.Main) {
-                        if (respuesta.isSuccessful) {
-                            println(respuesta.body())
-                            Toast.makeText(applicationContext, "Te has registrado con éxito!", Toast.LENGTH_LONG).show();
-                        }else {
-                            respuesta.errorBody()?.string()
+            if (nombreUsuario.isEmpty() || contrasena.isEmpty() || repitePassword.isEmpty() || mail.isEmpty() || nacimiento.isEmpty()) {
+                Toast.makeText(applicationContext, "Los campos están vacíos", Toast.LENGTH_LONG).show();
+            }else {
+                if (contrasena == repitePassword) {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val interceptor = HttpLoggingInterceptor()
+                        interceptor.level = HttpLoggingInterceptor.Level.BODY
+                        val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+                        val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/")
+                            .addConverterFactory(
+                                GsonConverterFactory.create()).client(client).build()
+                        var respuesta = conexion.create(APIService::class.java)
+                            .postRegister("baloncesto/CrearUsuario", Usuario(0, nombreUsuario, contrasena, mail, nacimiento) )
+                        withContext(Dispatchers.Main) {
+                            if (respuesta.isSuccessful) {
+                                println(respuesta.body())
+                                Toast.makeText(applicationContext, "Te has registrado con éxito!", Toast.LENGTH_LONG).show();
+                            }else {
+                                respuesta.errorBody()?.string()
+                            }
                         }
-                    }
 
+                    }
+                }else {
+                    Toast.makeText(applicationContext, "Las contraseñas no coinciden.", Toast.LENGTH_LONG).show();
                 }
             }
+
+
         }
 
 
