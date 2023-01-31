@@ -1,5 +1,6 @@
 package com.example.basketballcoach
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -42,11 +43,19 @@ class Register : AppCompatActivity() {
             val repitePassword = repiteContrasena.text.toString()
             val mail = email.text.toString()
             val nacimiento = fechaNacimiento.text.toString()
+            val emailRegex  = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
 
             if (nombreUsuario.isEmpty() || contrasena.isEmpty() || repitePassword.isEmpty() || mail.isEmpty() || nacimiento.isEmpty()) {
                 Toast.makeText(applicationContext, "Los campos están vacíos", Toast.LENGTH_LONG).show();
             }else {
-                if (contrasena == repitePassword) {
+                if (contrasena.length<8) {
+                    password.error = "La contraseña tiene que tenir mínimo 8 caracteres"
+                    if (contrasena != repitePassword) {
+                        repiteContrasena.error = "Las contraseñas no coinciden"
+                    }
+                }else if (!emailRegex.toRegex().matches(mail)){
+                    email.error = "Introduce un email correcto"
+                }else {
                     CoroutineScope(Dispatchers.IO).launch {
                         val interceptor = HttpLoggingInterceptor()
                         interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -60,15 +69,17 @@ class Register : AppCompatActivity() {
                             if (respuesta.isSuccessful) {
                                 println(respuesta.body())
                                 Toast.makeText(applicationContext, "Te has registrado con éxito!", Toast.LENGTH_LONG).show();
+                                val intent: Intent = Intent(this@Register, MainActivity::class.java);
+                                startActivity(intent);
                             }else {
                                 respuesta.errorBody()?.string()
                             }
                         }
 
                     }
-                }else {
-                    Toast.makeText(applicationContext, "Las contraseñas no coinciden.", Toast.LENGTH_LONG).show();
+
                 }
+
             }
 
 
