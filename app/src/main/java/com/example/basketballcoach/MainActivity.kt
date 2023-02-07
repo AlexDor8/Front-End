@@ -70,6 +70,10 @@ class MainActivity : AppCompatActivity() {
                     if(respuesta.body() == true) {
                         println("Te has logueado con exito")
                         Toast.makeText(applicationContext, "Te has logueado con éxito!", Toast.LENGTH_LONG).show();
+                        val intent: Intent = Intent(this@MainActivity, Profile::class.java);
+                        intent.putExtra("nombre", nombre)
+                        intent.putExtra("contrasena", contrasena)
+                        startActivity(intent);
                     }else{
                         Toast.makeText(applicationContext, "Error al loguearte.", Toast.LENGTH_LONG).show();
                         println("Error al loguearte. El usuario o la contraseña son incorrectos.")
