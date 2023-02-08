@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Profile">
+    tools:context=".Profile"
+    android:background="@color/fondo">
 
     <ImageView
         android:id="@+id/imageView4"
@@ -16,56 +17,146 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile" />
+        app:srcCompat="@drawable/usuario" />
 
     <TextView
         android:id="@+id/nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="246dp"
+        android:layout_marginEnd="4dp"
         android:text="Nombre"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/nombreUsuario"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/nombreUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/orange"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/nombre"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/editName"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
-
-    <TextView
-        android:id="@+id/emailText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="59dp"
-        android:text="Email"
-        app:layout_constraintEnd_toStartOf="@+id/emailTexto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombre" />
 
     <EditText
         android:id="@+id/emailTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="10dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="Name"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEmail"
         app:layout_constraintStart_toEndOf="@+id/emailText"
-        app:layout_constraintTop_toBottomOf="@+id/nombreUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/nombreUsuario"
+        android:backgroundTint="@color/orange"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/emailText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="65dp"
+        android:text="Email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombre"
+        android:textColor="@color/white"
+        />
+
+    <ImageButton
+        android:id="@+id/buttonEmail"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:contentDescription="Edita tu nombre"
+        android:hint="Edita tu nombre"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editName"
+        app:srcCompat="@drawable/editar" />
+
+    <ImageButton
+        android:id="@+id/editName"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="231dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:contentDescription="Edita tu nombre"
+        android:hint="Edita tu nombre"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/editar" />
+
+    <EditText
+        android:id="@+id/editTextFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="9dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text="Name"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton6"
+        app:layout_constraintStart_toEndOf="@+id/textViewFecha"
+        app:layout_constraintTop_toBottomOf="@+id/emailTexto"
+        android:backgroundTint="@color/orange"
+        android:textColor="@color/white"/>
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:contentDescription="Edita tu nombre"
+        android:hint="Edita tu nombre"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEmail"
+        app:srcCompat="@drawable/editar" />
+
+    <TextView
+        android:id="@+id/textViewFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="56dp"
+        android:text="Fecha \n de nacimiento"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailText"
+        android:textColor="@color/white"/>
+
+    <Button
+        android:id="@+id/cambiarContrasena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="100dp"
+        android:text="Cambiar contraseña"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextFecha"
+        android:backgroundTint="@color/orange2"
+        app:cornerRadius= "20dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

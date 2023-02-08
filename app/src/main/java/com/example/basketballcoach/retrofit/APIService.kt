@@ -28,4 +28,7 @@ interface APIService {
 
     @POST
     suspend fun getUserData(@Url url: String, @Body loginInformation: LoginInformation): Response<Usuario>
+
+    @POST
+    suspend fun editName(@Url url: String, @Body updateUser: UpdateUser) : Response<Feedback>
 }

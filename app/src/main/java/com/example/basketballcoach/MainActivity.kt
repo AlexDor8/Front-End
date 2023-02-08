@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 .addConverterFactory(
                     GsonConverterFactory.create()
                 ).client(client).build()
-            var respuesta = conexion.create(APIService::class.java).postLogin("baloncesto/cLogin", LoginInformation(nombre, contrasena))
+            var respuesta = conexion.create(APIService::class.java).postLogin("baloncesto/exUsuario", LoginInformation(nombre, contrasena))
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     if(respuesta.body() == true) {
