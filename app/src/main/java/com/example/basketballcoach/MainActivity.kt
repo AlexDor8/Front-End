@@ -86,6 +86,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun datosUsuario() {
-    }
 }
