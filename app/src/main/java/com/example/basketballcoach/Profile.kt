@@ -3,11 +3,10 @@ package com.example.basketballcoach
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import com.example.basketballcoach.model.LoginInformation
-import com.example.basketballcoach.model.UpdateUser
-import com.example.basketballcoach.model.Usuario
+import com.example.basketballcoach.model.*
 import com.example.basketballcoach.retrofit.APIService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,15 +30,18 @@ class Profile : AppCompatActivity() {
         val emailA = findViewById<EditText>(R.id.emailTexto)
         val fechaNacimiento = findViewById<EditText>(R.id.editTextFecha)
         val botonNombre = findViewById<ImageButton>(R.id.editName)
+        val botonEmail = findViewById<ImageButton>(R.id.buttonEmail)
+        val botonFecha = findViewById<ImageButton>(R.id.buttonFecha)
+        val botonContra = findViewById<Button>(R.id.cambiarContrasena)
 
 
 
-        conexion(profileName, profilePassword, nombreA, emailA, fechaNacimiento, botonNombre)
+        conexion(profileName, profilePassword, nombreA, emailA, fechaNacimiento, botonNombre, botonEmail, botonFecha, botonContra)
 
 
     }
 
-    fun conexion(nombre: String, contraseña: String, nombreA:EditText, emailA:EditText, fechaNacimiento:EditText, botonNombre:ImageButton) {
+    fun conexion(nombre: String, contraseña: String, nombreA:EditText, emailA:EditText, fechaNacimiento:EditText, botonNombre:ImageButton, botonEmail: ImageButton, botonFecha: ImageButton, botonContra: Button) {
         CoroutineScope(Dispatchers.IO).launch {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -58,6 +60,20 @@ class Profile : AppCompatActivity() {
                             var nuevoUsuarioNombre = nombreA.text.toString()
                             conexionCambiarNombre(usuario.id, nuevoUsuarioNombre)
                         }
+                        botonEmail.setOnClickListener {
+                            var nuevoUsuarioEmail = emailA.text.toString()
+                            conexionCambiarEmail(usuario.id, nuevoUsuarioEmail)
+                        }
+                        botonFecha.setOnClickListener {
+                            var nuevoUsuarioFecha = fechaNacimiento.text.toString()
+                            conexionCambiarFecha(usuario.id, nuevoUsuarioFecha)
+                        }
+                        botonContra.setOnClickListener {
+                            val intent: Intent = Intent(this@Profile, ProfilePassword::class.java);
+                            intent.putExtra("contrasena", usuario.contraseña)
+                            intent.putExtra("id", usuario.id)
+                            startActivity(intent);
+                        }
                     }
 
                 }else {
@@ -75,6 +91,42 @@ class Profile : AppCompatActivity() {
             val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
                 GsonConverterFactory.create()).client(client).build()
             var respuesta = conexion.create(APIService::class.java).editName("baloncesto/cNombre", UpdateUser(id, nombre))
+            withContext(Dispatchers.Main) {
+                if (respuesta.isSuccessful) {
+                    println(respuesta.body())
+                }else {
+                    respuesta.errorBody()?.string()
+                }
+            }
+        }
+    }
+
+    fun conexionCambiarEmail(id: Int, correo: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+            val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
+                GsonConverterFactory.create()).client(client).build()
+            var respuesta = conexion.create(APIService::class.java).editEmail("baloncesto/cEmail", UpdateEmail(id, correo))
+            withContext(Dispatchers.Main) {
+                if (respuesta.isSuccessful) {
+                    println(respuesta.body())
+                }else {
+                    respuesta.errorBody()?.string()
+                }
+            }
+        }
+    }
+
+    fun conexionCambiarFecha(id: Int, fechaNacimiento: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+            val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
+                GsonConverterFactory.create()).client(client).build()
+            var respuesta = conexion.create(APIService::class.java).editFecha("baloncesto/cFechaNacimiento", UpdateFecha(id, fechaNacimiento))
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())

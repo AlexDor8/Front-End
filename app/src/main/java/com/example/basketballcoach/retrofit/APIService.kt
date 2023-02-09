@@ -31,4 +31,17 @@ interface APIService {
 
     @POST
     suspend fun editName(@Url url: String, @Body updateUser: UpdateUser) : Response<Feedback>
+
+    @POST
+    suspend fun editEmail(@Url url: String, @Body updateEmail: UpdateEmail) : Response<Feedback>
+
+    @POST
+    suspend fun editFecha(@Url url: String, @Body updateFecha: UpdateFecha) : Response<Feedback>
+
+    @POST
+    suspend fun editContrasena(@Url url: String, @Body updatePassword: UpdatePassword) : Response<Feedback>
+
+    @POST
+    suspend fun esContrasena(@Url url: String, @Body updatePassword: UpdatePassword) : Response<Boolean>
+
 }
