@@ -61,8 +61,13 @@ class Profile : AppCompatActivity() {
                             conexionCambiarNombre(usuario.id, nuevoUsuarioNombre)
                         }
                         botonEmail.setOnClickListener {
+                            val emailRegex  = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
                             var nuevoUsuarioEmail = emailA.text.toString()
-                            conexionCambiarEmail(usuario.id, nuevoUsuarioEmail)
+                            if (!emailRegex.toRegex().matches(nuevoUsuarioEmail)) {
+                                emailA.error = "Introduce un email correcto"
+                            }else {
+                                conexionCambiarEmail(usuario.id, nuevoUsuarioEmail)
+                            }
                         }
                         botonFecha.setOnClickListener {
                             var nuevoUsuarioFecha = fechaNacimiento.text.toString()

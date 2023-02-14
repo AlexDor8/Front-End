@@ -3,10 +3,7 @@ package com.example.basketballcoach.retrofit
 import android.util.JsonReader
 import com.example.basketballcoach.model.*
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Url
+import retrofit2.http.*
 import java.util.*
 
 interface APIService {
@@ -29,16 +26,16 @@ interface APIService {
     @POST
     suspend fun getUserData(@Url url: String, @Body loginInformation: LoginInformation): Response<Usuario>
 
-    @POST
+    @PUT
     suspend fun editName(@Url url: String, @Body updateUser: UpdateUser) : Response<Feedback>
 
-    @POST
+    @PUT
     suspend fun editEmail(@Url url: String, @Body updateEmail: UpdateEmail) : Response<Feedback>
 
-    @POST
+    @PUT
     suspend fun editFecha(@Url url: String, @Body updateFecha: UpdateFecha) : Response<Feedback>
 
-    @POST
+    @PUT
     suspend fun editContrasena(@Url url: String, @Body updatePassword: UpdatePassword) : Response<Feedback>
 
     @POST
