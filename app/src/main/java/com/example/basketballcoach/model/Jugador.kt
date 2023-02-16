@@ -8,7 +8,8 @@ data class Jugador(
     val dorsal: Int,
     val rol: String,
     val salud: String,
-    val altura: Int,
-    val manoDominante: String
+    val altura: String,
+    val manoDominante: String,
+    val foto: String
 ) {
 }
