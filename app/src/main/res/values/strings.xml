@@ -8,4 +8,6 @@
     <string name="repiteContraseña">Repite contraseña</string>
     <string name="email">Correo electrónico</string>
     <string name="fechaNacimiento">Fecha de nacimiento</string>
+    <string name="dorsal">Dorsal</string>
+    <string name="altura">Altura</string>
 </resources>
