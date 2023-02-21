@@ -49,7 +49,7 @@ class AboutUs : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_us)
         inicializacionRecyclerView()
-        //conexion()
+        conexion()
         buscarSearchView()
     }
 
