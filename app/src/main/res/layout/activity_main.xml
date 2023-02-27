@@ -13,26 +13,24 @@
         android:id="@+id/botonaboutus"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
         android:backgroundTint="@color/grey"
         android:text="@string/aboutusbutton"
         app:cornerRadius="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.848" />
+        app:layout_constraintTop_toBottomOf="@+id/twitter" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099"
         app:srcCompat="@drawable/logo" />
 
     <EditText
@@ -51,67 +49,63 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         android:backgroundTint="@color/orange"/>
+
     <EditText
         android:id="@+id/password"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:backgroundTint="@color/orange"
         android:ems="10"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:hint="@string/password"
-        android:textColorHint="@color/white"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
-        app:layout_constraintVertical_bias="0.053" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <Button
         android:id="@+id/botonlogin"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="@color/orange"
         android:text="@string/loginbutton"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.078"
-        android:backgroundTint="@color/orange"
-        app:cornerRadius= "20dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <Button
         android:id="@+id/botonregistro"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="@string/registerbutton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.293"
+        android:layout_marginTop="28dp"
         android:backgroundTint="@color/orange"
-        app:cornerRadius= "20dp"/>
+        android:text="@string/registerbutton"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botonlogin" />
 
     <ImageButton
         android:id="@+id/twitter"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_social"
         android:contentDescription="Twitter button"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.237"
         app:layout_constraintStart_toEndOf="@+id/google"
         app:layout_constraintTop_toBottomOf="@+id/botonregistro"
-        app:layout_constraintVertical_bias="0.142"
         app:srcCompat="@drawable/gorjeo" />
 
     <ImageButton
@@ -119,17 +113,15 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_social"
         android:contentDescription="Fcebook button"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.262"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botonregistro"
-        app:layout_constraintVertical_bias="0.142"
         app:srcCompat="@drawable/facebook" />
 
     <ImageButton
@@ -137,17 +129,15 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_social"
         android:contentDescription="Google button"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toEndOf="@+id/facebook"
         app:layout_constraintTop_toBottomOf="@+id/botonregistro"
-        app:layout_constraintVertical_bias="0.142"
         app:srcCompat="@drawable/google" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

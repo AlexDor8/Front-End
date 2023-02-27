@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.basketballcoach"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -32,6 +32,9 @@ android {
 }
 
 dependencies {
+
+    implementation 'androidx.activity:activity:1.6.1'
+
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     //gson

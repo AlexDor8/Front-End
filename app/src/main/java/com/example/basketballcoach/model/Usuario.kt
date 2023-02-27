@@ -7,7 +7,8 @@ data class Usuario(
     var nombre: String,
     var contraseña: String,
     var correo: String,
-    var fechaNacimiento: String
+    var fechaNacimiento: Date,
+    var foto: String
 ) {
 
 

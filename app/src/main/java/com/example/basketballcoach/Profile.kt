@@ -3,9 +3,13 @@ package com.example.basketballcoach
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.basketballcoach.model.*
 import com.example.basketballcoach.retrofit.APIService
 import kotlinx.coroutines.CoroutineScope
@@ -19,6 +23,19 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class Profile : AppCompatActivity() {
+
+    val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri!=null) {
+            imagen.setImageURI(uri)
+        }else {
+            Log.i("fotoPerfil", "No seleccionada")
+        }
+    }
+
+    lateinit var botonImagen :ImageButton
+    lateinit var saveImage: ImageButton
+    lateinit var imagen: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -33,8 +50,11 @@ class Profile : AppCompatActivity() {
         val botonEmail = findViewById<ImageButton>(R.id.buttonEmail)
         val botonFecha = findViewById<ImageButton>(R.id.buttonFecha)
         val botonContra = findViewById<Button>(R.id.cambiarContrasena)
-
-
+        botonImagen = findViewById(R.id.editFoto)
+        botonImagen.setOnClickListener {
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+        imagen = findViewById(R.id.fotoPerfil)
 
         conexion(profileName, profilePassword, nombreA, emailA, fechaNacimiento, botonNombre, botonEmail, botonFecha, botonContra)
 
@@ -55,7 +75,7 @@ class Profile : AppCompatActivity() {
                     if (usuario != null) {
                         nombreA.setText(usuario.nombre)
                         emailA.setText(usuario.correo)
-                        fechaNacimiento.setText((usuario.fechaNacimiento))
+                        fechaNacimiento.setText((usuario.fechaNacimiento.toString()))
                         botonNombre.setOnClickListener {
                             var nuevoUsuarioNombre = nombreA.text.toString()
                             conexionCambiarNombre(usuario.id, nuevoUsuarioNombre)
