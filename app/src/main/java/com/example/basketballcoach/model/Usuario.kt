@@ -6,8 +6,8 @@ data class Usuario(
     var id:Int,
     var nombre: String,
     var contraseña: String,
-    var correo: String,
-    var fechaNacimiento: Date,
+    var email: String,
+    var fechaNacimiento: String,
     var foto: String
 ) {
 

@@ -38,6 +38,9 @@ interface APIService {
     @PUT
     suspend fun editContrasena(@Url url: String, @Body updatePassword: UpdatePassword) : Response<Feedback>
 
+    @PUT
+    suspend fun editFoto(@Url url: String, @Body upadateFoto: UpdateFoto) : Response<Feedback>
+
     @POST
     suspend fun esContrasena(@Url url: String, @Body updatePassword: UpdatePassword) : Response<Boolean>
 

@@ -1,6 +1,7 @@
 package com.example.basketballcoach
 
 import android.content.Intent
+import android.icu.number.NumberFormatter.with
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,9 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
+import com.bumptech.glide.Glide.with
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.with
 import com.example.basketballcoach.model.*
 import com.example.basketballcoach.retrofit.APIService
 import kotlinx.coroutines.CoroutineScope
@@ -56,7 +60,11 @@ class Profile : AppCompatActivity() {
         }
         imagen = findViewById(R.id.fotoPerfil)
 
+
         conexion(profileName, profilePassword, nombreA, emailA, fechaNacimiento, botonNombre, botonEmail, botonFecha, botonContra)
+
+        saveImage = findViewById(R.id.guardarFoto)
+
 
 
     }
@@ -74,8 +82,10 @@ class Profile : AppCompatActivity() {
                     var usuario = respuesta.body()
                     if (usuario != null) {
                         nombreA.setText(usuario.nombre)
-                        emailA.setText(usuario.correo)
-                        fechaNacimiento.setText((usuario.fechaNacimiento.toString()))
+                        emailA.setText(usuario.email)
+                        fechaNacimiento.setText((usuario.fechaNacimiento))
+                        //MyAppGlideModule.with(imagen.context).load(usuario.foto).placeholder(R.drawable.usuario).fitCenter().into(imagen)
+                        with(imagen.context).load(usuario.foto).into(imagen)
                         botonNombre.setOnClickListener {
                             var nuevoUsuarioNombre = nombreA.text.toString()
                             conexionCambiarNombre(usuario.id, nuevoUsuarioNombre)
@@ -98,6 +108,12 @@ class Profile : AppCompatActivity() {
                             intent.putExtra("contrasena", usuario.contraseña)
                             intent.putExtra("id", usuario.id)
                             startActivity(intent);
+                        }
+                        saveImage.setOnClickListener {
+                            usuario.foto = imagen.toString()
+
+                            println(usuario.foto)
+                            conexionGuardarFoto(usuario.id, usuario.foto)
                         }
                     }
 
@@ -161,4 +177,23 @@ class Profile : AppCompatActivity() {
             }
         }
     }
+
+    fun conexionGuardarFoto(id: Int, imagen: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+            val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
+                GsonConverterFactory.create()).client(client).build()
+            var respuesta = conexion.create(APIService::class.java).editFoto("baloncesto/cFoto", UpdateFoto(id, imagen))
+            withContext(Dispatchers.Main) {
+                if (respuesta.isSuccessful) {
+                    println(respuesta.body())
+                }else {
+                    respuesta.errorBody()?.string()
+                }
+            }
+        }
+    }
 }
+

@@ -69,7 +69,7 @@ class Register : AppCompatActivity() {
         if (nombreUsuario.isEmpty() || contrasena.isEmpty() || repitePassword.isEmpty() || mail.isEmpty() || nacimiento.isEmpty()) {
             Toast.makeText(applicationContext, "Los campos están vacíos", Toast.LENGTH_LONG).show();
         }else {
-            var userExiste = usuarioExiste(registerNombreUsuario, nombreUsuario, contrasena, mail, fecha)
+            var userExiste = usuarioExiste(registerNombreUsuario, nombreUsuario, contrasena, mail, nacimiento)
             println("Este usuario existe?$userExiste")
             if (contrasena.length<8) {
                 password.error = "La contraseña tiene que tenir mínimo 8 caracteres"
@@ -81,13 +81,13 @@ class Register : AppCompatActivity() {
             }else if(userExiste){
                 registerNombreUsuario.error = "Este usuario ya existe"
             }else {
-                conexionRegistro(nombreUsuario, contrasena, mail, fecha)
+                conexionRegistro(nombreUsuario, contrasena, mail, nacimiento)
             }
 
         }
     }
 
-    fun conexionRegistro(nombreUsuario:String, contrasena:String, mail:String, nacimiento:Date) {
+    fun conexionRegistro(nombreUsuario:String, contrasena:String, mail:String, nacimiento:String) {
         CoroutineScope(Dispatchers.IO).launch {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -111,7 +111,7 @@ class Register : AppCompatActivity() {
         }
     }
 
-    fun usuarioExiste(nombre: EditText, nombreUsuario:String, contrasena:String, mail:String, nacimiento: Date) :Boolean {
+    fun usuarioExiste(nombre: EditText, nombreUsuario:String, contrasena:String, mail:String, nacimiento: String) :Boolean {
         var usuarioExiste = false
         CoroutineScope(Dispatchers.IO).launch {
             val interceptor = HttpLoggingInterceptor()
