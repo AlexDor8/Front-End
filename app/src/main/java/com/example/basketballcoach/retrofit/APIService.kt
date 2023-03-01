@@ -44,4 +44,6 @@ interface APIService {
     @POST
     suspend fun esContrasena(@Url url: String, @Body updatePassword: UpdatePassword) : Response<Boolean>
 
+    @POST
+    suspend fun anadirJugador(@Url url: String, @Body jugador: Jugador) : Response<Feedback>
 }

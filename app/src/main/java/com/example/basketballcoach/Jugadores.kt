@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basketballcoach.adapter.IntegrantesAdapter
 import com.example.basketballcoach.adapterTeam.JugadoresAdapter
+import com.example.basketballcoach.model.Equipo
 import com.example.basketballcoach.model.Jugador
 
 class Jugadores : AppCompatActivity() {
@@ -22,7 +23,7 @@ class Jugadores : AppCompatActivity() {
             191,
             "Derecha",
             "",
-            1
+            Equipo(1, "Golden State Warriors", 1)
         ),
         Jugador(
             2,
@@ -35,7 +36,7 @@ class Jugadores : AppCompatActivity() {
             201,
             "Derecha",
             "",
-            1
+            Equipo(1, "Golden State Warriors", 1)
         )
     )
 
