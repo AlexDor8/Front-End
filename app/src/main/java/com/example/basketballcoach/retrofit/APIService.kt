@@ -46,4 +46,7 @@ interface APIService {
 
     @POST
     suspend fun anadirJugador(@Url url: String, @Body jugador: Jugador) : Response<Feedback>
+
+    @GET
+    suspend fun getJugadores(@Url url: String): Response<List<Jugador>>
 }
