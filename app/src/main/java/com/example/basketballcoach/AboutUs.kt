@@ -1,5 +1,6 @@
 package com.example.basketballcoach
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView
@@ -58,7 +59,9 @@ class AboutUs : AppCompatActivity() {
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.iconoJugador -> {
-                    loadFragment(PerfilFragment())
+                    //loadFragment(PerfilFragment())
+                    val intent: Intent = Intent(this@AboutUs, MainActivity::class.java);
+                    startActivity(intent);
                     true
                 }
                 R.id.iconoJugadores -> {
