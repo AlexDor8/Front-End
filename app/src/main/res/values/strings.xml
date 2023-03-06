@@ -10,4 +10,6 @@
     <string name="fechaNacimiento">Fecha de nacimiento</string>
     <string name="dorsal">Dorsal</string>
     <string name="altura">Altura</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

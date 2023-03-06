@@ -1,10 +1,13 @@
 package com.example.basketballcoach
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.icu.number.NumberFormatter.with
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -20,10 +23,17 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+import java.io.FileOutputStream
 
 
 class Profile : AppCompatActivity() {
@@ -69,6 +79,8 @@ class Profile : AppCompatActivity() {
 
     }
 
+
+
     fun conexion(nombre: String, contraseña: String, nombreA:EditText, emailA:EditText, fechaNacimiento:EditText, botonNombre:ImageButton, botonEmail: ImageButton, botonFecha: ImageButton, botonContra: Button) {
         CoroutineScope(Dispatchers.IO).launch {
             val interceptor = HttpLoggingInterceptor()
@@ -112,8 +124,23 @@ class Profile : AppCompatActivity() {
                         saveImage.setOnClickListener {
                             usuario.foto = imagen.toString()
 
-                            println(usuario.foto)
-                            conexionGuardarFoto(usuario.id, usuario.foto)
+                            var imageFile:File = File("")
+
+                            val drawable = imagen.drawable
+
+                            if (drawable is BitmapDrawable) {
+                                val bitmap = drawable.bitmap
+                                val filesDir = applicationContext.filesDir
+                                imageFile = File(filesDir, "image.png")
+                                val outputStream = FileOutputStream(imageFile)
+                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                                outputStream.close()
+
+                            }
+                            val requestFile: RequestBody = imageFile.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                            val fotoUpdate: MultipartBody.Part = MultipartBody.Part.createFormData("image", imageFile.name, requestFile)
+                            val idUsuario: RequestBody =usuario.id.toString().toRequestBody("multipart/form-data".toMediaTypeOrNull())
+                            conexionGuardarFoto(idUsuario,  fotoUpdate)
                         }
                     }
 
@@ -178,14 +205,14 @@ class Profile : AppCompatActivity() {
         }
     }
 
-    fun conexionGuardarFoto(id: Int, imagen: String) {
+    fun conexionGuardarFoto(id: RequestBody, imagen: MultipartBody.Part) {
         CoroutineScope(Dispatchers.IO).launch {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
             val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
                 GsonConverterFactory.create()).client(client).build()
-            var respuesta = conexion.create(APIService::class.java).editFoto("baloncesto/cFoto", UpdateFoto(id, imagen))
+            var respuesta = conexion.create(APIService::class.java).editFoto("baloncesto/cFoto", id, imagen)
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())

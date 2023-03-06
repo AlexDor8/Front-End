@@ -3,11 +3,13 @@ package com.example.basketballcoach
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basketballcoach.adapter.IntegrantesAdapter
 import com.example.basketballcoach.model.Integrantes
 import com.example.basketballcoach.retrofit.APIService
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,14 +45,47 @@ class AboutUs : AppCompatActivity() {
             foto = ""
         )
     )
+
+    lateinit var bottomNav : BottomNavigationView
+
     private lateinit var integrantesRvAdapter: IntegrantesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_us)
+
+        bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.iconoJugador -> {
+                    loadFragment(PerfilFragment())
+                    true
+                }
+                R.id.iconoJugadores -> {
+                    loadFragment(EquipoFragment())
+                    true
+                }
+                R.id.iconoPista -> {
+                    loadFragment(PistaFragment())
+                    true
+                }
+                else -> {
+                    loadFragment(PistaFragment())
+                    true
+                }
+            }
+
+        }
+
         inicializacionRecyclerView()
         conexion()
         buscarSearchView()
+    }
+
+    private  fun loadFragment(fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container,fragment)
+        transaction.commit()
     }
 
     private fun inicializacionRecyclerView() {

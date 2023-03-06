@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/iconoJugador"
+        android:icon="@drawable/jugador"
+        android:title="Player" />
+    <item
+        android:id="@+id/iconoJugadores"
+        android:icon="@drawable/equipo"
+
+        android:title="Players" />
+    <item
+        android:id="@+id/iconoPista"
+        android:icon="@drawable/pistadebaloncesto"
+        android:title="Court" />
+    <item
+        android:id="@+id/iconoCalendario"
+        android:icon="@drawable/calendario"
+        android:title="Calendar"  />
+
+    <item
+        android:id="@+id/iconConfiguracion"
+        android:icon="@drawable/configuraciones"
+        android:title="Setting" />
+</menu>

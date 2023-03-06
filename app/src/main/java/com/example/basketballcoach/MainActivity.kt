@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.Toolbar
 import com.example.basketballcoach.model.LoginInformation
 import com.example.basketballcoach.retrofit.APIService
 import kotlinx.coroutines.CoroutineScope
@@ -22,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
         val login: Button = findViewById(R.id.botonlogin);
         val register: Button = findViewById(R.id.botonregistro);
@@ -54,6 +54,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent);
         }
     }
+
+
+
 
     private fun conexion(nombre: String, contrasena: String) {
         CoroutineScope(Dispatchers.IO).launch {

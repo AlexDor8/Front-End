@@ -2,6 +2,8 @@ package com.example.basketballcoach.retrofit
 
 import android.util.JsonReader
 import com.example.basketballcoach.model.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 import java.util.*
@@ -38,8 +40,9 @@ interface APIService {
     @PUT
     suspend fun editContrasena(@Url url: String, @Body updatePassword: UpdatePassword) : Response<Feedback>
 
+    @Multipart
     @PUT
-    suspend fun editFoto(@Url url: String, @Body upadateFoto: UpdateFoto) : Response<Feedback>
+    suspend fun editFoto(@Url url: String, @Part("id") name: RequestBody, @Part image: MultipartBody.Part) : Response<Feedback>
 
     @POST
     suspend fun esContrasena(@Url url: String, @Body updatePassword: UpdatePassword) : Response<Boolean>
