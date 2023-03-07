@@ -47,7 +47,7 @@ class AboutUs : AppCompatActivity() {
         )
     )
 
-    lateinit var bottomNav : BottomNavigationView
+
 
     private lateinit var integrantesRvAdapter: IntegrantesAdapter
 
@@ -55,41 +55,14 @@ class AboutUs : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about_us)
 
-        bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNav.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.iconoJugador -> {
-                    //loadFragment(PerfilFragment())
-                    val intent: Intent = Intent(this@AboutUs, MainActivity::class.java);
-                    startActivity(intent);
-                    true
-                }
-                R.id.iconoJugadores -> {
-                    loadFragment(EquipoFragment())
-                    true
-                }
-                R.id.iconoPista -> {
-                    loadFragment(PistaFragment())
-                    true
-                }
-                else -> {
-                    loadFragment(PistaFragment())
-                    true
-                }
-            }
 
-        }
 
         inicializacionRecyclerView()
         conexion()
         buscarSearchView()
     }
 
-    private  fun loadFragment(fragment: Fragment){
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container,fragment)
-        transaction.commit()
-    }
+
 
     private fun inicializacionRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerIntegrantes)

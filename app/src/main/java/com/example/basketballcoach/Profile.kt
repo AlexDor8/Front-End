@@ -14,11 +14,13 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Glide.with
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.with
 import com.example.basketballcoach.model.*
 import com.example.basketballcoach.retrofit.APIService
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -50,9 +52,44 @@ class Profile : AppCompatActivity() {
     lateinit var saveImage: ImageButton
     lateinit var imagen: ImageView
 
+    lateinit var bottomNav : BottomNavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+
+        bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+
+        bottomNav.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.iconoJugador -> {
+                    //loadFragment(PerfilFragment())
+                    finish()
+                    startActivity(intent)
+                    true
+                }
+                R.id.iconoJugadores -> {
+                    val intent: Intent = Intent(this@Profile, Jugadores::class.java);
+                    startActivity(intent);
+                    //loadFragment(EquipoFragment())
+                    true
+                }
+                R.id.iconoPista -> {
+                    //loadFragment(PistaFragment())
+                    true
+                }
+                R.id.iconoCalendario -> {
+                    val intent: Intent = Intent(this@Profile, Calendar::class.java);
+                    startActivity(intent);
+                    true
+                }
+                else -> {
+                    loadFragment(PistaFragment())
+                    true
+                }
+            }
+
+        }
 
         var profileName = intent.getStringExtra("nombre").toString()
         var profilePassword = intent.getStringExtra("contrasena").toString()
@@ -79,6 +116,11 @@ class Profile : AppCompatActivity() {
 
     }
 
+    private  fun loadFragment(fragment: Fragment){
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container,fragment)
+        transaction.commit()
+    }
 
 
     fun conexion(nombre: String, contraseña: String, nombreA:EditText, emailA:EditText, fechaNacimiento:EditText, botonNombre:ImageButton, botonEmail: ImageButton, botonFecha: ImageButton, botonContra: Button) {
@@ -93,6 +135,8 @@ class Profile : AppCompatActivity() {
                 if (respuesta.isSuccessful) {
                     var usuario = respuesta.body()
                     if (usuario != null) {
+
+
                         nombreA.setText(usuario.nombre)
                         emailA.setText(usuario.email)
                         fechaNacimiento.setText((usuario.fechaNacimiento))
@@ -122,25 +166,27 @@ class Profile : AppCompatActivity() {
                             startActivity(intent);
                         }
                         saveImage.setOnClickListener {
-                            usuario.foto = imagen.toString()
 
                             var imageFile:File = File("")
+
+                            var pathImage:String = "";
 
                             val drawable = imagen.drawable
 
                             if (drawable is BitmapDrawable) {
                                 val bitmap = drawable.bitmap
                                 val filesDir = applicationContext.filesDir
-                                imageFile = File(filesDir, "image.png")
+                                imageFile = File("$filesDir/$drawable")
+                                pathImage= imageFile.toString()
+                                println(pathImage)
                                 val outputStream = FileOutputStream(imageFile)
                                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
                                 outputStream.close()
 
                             }
-                            val requestFile: RequestBody = imageFile.asRequestBody("multipart/form-data".toMediaTypeOrNull())
-                            val fotoUpdate: MultipartBody.Part = MultipartBody.Part.createFormData("image", imageFile.name, requestFile)
-                            val idUsuario: RequestBody =usuario.id.toString().toRequestBody("multipart/form-data".toMediaTypeOrNull())
-                            conexionGuardarFoto(idUsuario,  fotoUpdate)
+                            conexionGuardarFoto(usuario.id,  pathImage)
+
+
                         }
                     }
 
@@ -205,14 +251,14 @@ class Profile : AppCompatActivity() {
         }
     }
 
-    fun conexionGuardarFoto(id: RequestBody, imagen: MultipartBody.Part) {
+    fun conexionGuardarFoto(id: Int, imagen: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
             val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
                 GsonConverterFactory.create()).client(client).build()
-            var respuesta = conexion.create(APIService::class.java).editFoto("baloncesto/cFoto", id, imagen)
+            var respuesta = conexion.create(APIService::class.java).editFoto("baloncesto/cFoto", UpdateFoto(id, imagen))
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())

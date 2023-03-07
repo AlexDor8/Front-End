@@ -1,5 +1,6 @@
 package com.example.basketballcoach.model
 
+import java.io.Serializable
 import java.util.*
 
 data class Usuario(
@@ -9,7 +10,7 @@ data class Usuario(
     var email: String,
     var fechaNacimiento: String,
     var foto: String
-) {
+) :Serializable{
 
 
 }
