@@ -54,17 +54,20 @@ class Profile : AppCompatActivity() {
 
     lateinit var bottomNav : BottomNavigationView
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 
+
+
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.iconoJugador -> {
                     //loadFragment(PerfilFragment())
-                    finish()
                     startActivity(intent)
                     true
                 }
@@ -91,8 +94,7 @@ class Profile : AppCompatActivity() {
 
         }
 
-        var profileName = intent.getStringExtra("nombre").toString()
-        var profilePassword = intent.getStringExtra("contrasena").toString()
+
 
         val nombreA = findViewById<EditText>(R.id.nombreUsuario)
         val emailA = findViewById<EditText>(R.id.emailTexto)
@@ -108,7 +110,7 @@ class Profile : AppCompatActivity() {
         imagen = findViewById(R.id.fotoPerfil)
 
 
-        conexion(profileName, profilePassword, nombreA, emailA, fechaNacimiento, botonNombre, botonEmail, botonFecha, botonContra)
+        conexion(Globals.loginInformation.nombre, Globals.loginInformation.contraseña, nombreA, emailA, fechaNacimiento, botonNombre, botonEmail, botonFecha, botonContra)
 
         saveImage = findViewById(R.id.guardarFoto)
 

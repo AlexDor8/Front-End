@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import android.widget.Toolbar
+import com.example.basketballcoach.model.Globals
 import com.example.basketballcoach.model.LoginInformation
 import com.example.basketballcoach.retrofit.APIService
 import kotlinx.coroutines.CoroutineScope
@@ -74,8 +75,7 @@ class MainActivity : AppCompatActivity() {
                         println("Te has logueado con exito")
                         Toast.makeText(applicationContext, "Te has logueado con éxito!", Toast.LENGTH_LONG).show();
                         val intent: Intent = Intent(this@MainActivity, Profile::class.java);
-                        intent.putExtra("nombre", nombre)
-                        intent.putExtra("contrasena", contrasena)
+                        Globals.loginInformation =LoginInformation(nombre, contrasena)
                         startActivity(intent);
                     }else{
                         Toast.makeText(applicationContext, "Error al loguearte.", Toast.LENGTH_LONG).show();

@@ -1,5 +1,6 @@
 package com.example.basketballcoach
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView
@@ -10,6 +11,7 @@ import com.example.basketballcoach.adapterTeam.JugadoresAdapter
 import com.example.basketballcoach.model.Equipo
 import com.example.basketballcoach.model.Jugador
 import com.example.basketballcoach.retrofit.APIService
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -52,9 +54,46 @@ class Jugadores : AppCompatActivity() {
 
     private lateinit var jugadoresRvAdapter: JugadoresAdapter
 
+    lateinit var bottomNav : BottomNavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jugadores)
+
+        bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+
+        bottomNav.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.iconoJugador -> {
+                    //loadFragment(PerfilFragment())
+
+                    val intent: Intent = Intent(this@Jugadores, Profile::class.java);
+                    startActivity(intent);
+                    true
+                }
+                R.id.iconoJugadores -> {
+                    startActivity(intent)
+                    //loadFragment(EquipoFragment())
+                    true
+                }
+                R.id.iconoPista -> {
+                    //loadFragment(PistaFragment())
+                    true
+                }
+                R.id.iconoCalendario -> {
+                    val intent: Intent = Intent(this, Calendar::class.java);
+                    startActivity(intent);
+                    true
+                }
+                else -> {
+                    println("Clica alguno de los iconos del menu")
+                    true
+                }
+            }
+
+        }
+
+
         inicializacionRecyclerView()
         conexion()
         buscarSearchView()
