@@ -57,7 +57,7 @@ class AnadirJugador : AppCompatActivity() {
                 .addConverterFactory(
                     GsonConverterFactory.create()).client(client).build()
             var respuesta = conexion.create(APIService::class.java)
-                .anadirJugador("baloncesto/anadirJugador", Jugador(0, nombre, primerApellido, posicion, dorsal, rol, salud, altura, manoDominante, "", Equipo(1, "Golden State Warriors", 1)))
+                .anadirJugador("baloncesto/anadirJugador", Jugador(0, nombre, primerApellido, posicion, dorsal, rol, salud, altura, manoDominante, "", Equipo(1, "Golden State Warriors", 1, "")))
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())

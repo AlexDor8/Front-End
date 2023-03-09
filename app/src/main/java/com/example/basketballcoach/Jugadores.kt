@@ -35,7 +35,7 @@ class Jugadores : AppCompatActivity() {
             191,
             "Derecha",
             "",
-            Equipo(1, "Golden State Warriors", 1)
+            Equipo(1, "Golden State Warriors", 1, "")
         ),
         Jugador(
             2,
@@ -48,7 +48,7 @@ class Jugadores : AppCompatActivity() {
             201,
             "Derecha",
             "",
-            Equipo(1, "Golden State Warriors", 1)
+            Equipo(1, "Golden State Warriors", 1, "")
         )
     )
 
