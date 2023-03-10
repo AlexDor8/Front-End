@@ -8,10 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
+import android.widget.*
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -210,6 +207,7 @@ class Profile : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())
+                    Toast.makeText(applicationContext, "El nombre ha sido cambiado", Toast.LENGTH_LONG).show();
                 }else {
                     respuesta.errorBody()?.string()
                 }
@@ -228,6 +226,7 @@ class Profile : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())
+                    Toast.makeText(applicationContext, "El email ha sido cambiado", Toast.LENGTH_LONG).show();
                 }else {
                     respuesta.errorBody()?.string()
                 }
@@ -246,6 +245,7 @@ class Profile : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())
+                    Toast.makeText(applicationContext, "La fecha ha sido cambiada", Toast.LENGTH_LONG).show();
                 }else {
                     respuesta.errorBody()?.string()
                 }
@@ -264,6 +264,7 @@ class Profile : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())
+                    Toast.makeText(applicationContext, "La foto ha sido cambiada!", Toast.LENGTH_LONG).show();
                 }else {
                     respuesta.errorBody()?.string()
                 }

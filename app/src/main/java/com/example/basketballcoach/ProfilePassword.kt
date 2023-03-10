@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.example.basketballcoach.model.UpdateFecha
 import com.example.basketballcoach.model.UpdatePassword
 import com.example.basketballcoach.retrofit.APIService
@@ -51,6 +52,7 @@ class ProfilePassword : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())
+                    Toast.makeText(applicationContext, "La contraseña ha sido cambiada", Toast.LENGTH_LONG).show();
                 }else {
                     respuesta.errorBody()?.string()
                 }
