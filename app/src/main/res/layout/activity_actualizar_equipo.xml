@@ -19,6 +19,40 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/usuario" />
 
+    <ImageButton
+        android:id="@+id/editFotoEquipo"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="51dp"
+        android:background="@null"
+        android:contentDescription="Edita tu nombre"
+        android:hint="Edita tu nombre"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imagenEquipoActualizar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/editar" />
+
+    <ImageButton
+        android:id="@+id/guardarFotoEquipo"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="51dp"
+        android:background="@null"
+        android:contentDescription="Edita tu nombre"
+        android:hint="Edita tu nombre"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imagenEquipoActualizar"
+        app:layout_constraintTop_toBottomOf="@+id/editFotoEquipo"
+        app:srcCompat="@drawable/guardarfoto" />
+
     <EditText
         android:id="@+id/nombreEquipoActualizar"
         android:layout_width="250dp"

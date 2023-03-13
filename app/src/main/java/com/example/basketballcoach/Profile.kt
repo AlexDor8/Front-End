@@ -134,8 +134,7 @@ class Profile : AppCompatActivity() {
                 if (respuesta.isSuccessful) {
                     var usuario = respuesta.body()
                     if (usuario != null) {
-
-
+                        Globals.usuario = usuario
                         nombreA.setText(usuario.nombre)
                         emailA.setText(usuario.email)
                         fechaNacimiento.setText((usuario.fechaNacimiento))

@@ -1,15 +1,13 @@
 package com.example.basketballcoach
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import com.example.basketballcoach.model.Equipo
 import com.example.basketballcoach.model.Jugador
-import com.example.basketballcoach.model.Usuario
 import com.example.basketballcoach.retrofit.APIService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -69,4 +67,6 @@ class AnadirJugador : AppCompatActivity() {
 
         }
     }
+
+
 }

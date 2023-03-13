@@ -149,7 +149,7 @@ class Jugadores : AppCompatActivity() {
             val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build()
             var respuesta = conexion.create(APIService::class.java)
-                .getJugadores("baloncesto/buscarJugador/$query")
+                .getJugadores("baloncesto/buscarJugador/$query/1")
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     val nuevosJugadores = respuesta.body() ?: emptyList()
