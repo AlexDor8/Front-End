@@ -44,7 +44,7 @@ class ActualizarEquipo : AppCompatActivity() {
 
         actualizarEquipoNombre = findViewById<EditText>(R.id.nombreEquipoActualizar)
         imagenEquipoActualizar = findViewById<ImageView>(R.id.imagenEquipoActualizar)
-        botonActualizarNombre = findViewById<ImageButton>(R.id.nombreEquipoActualizar)
+        botonActualizarNombre = findViewById<ImageButton>(R.id.buttonActualizarNombreEquipo)
         botonImagenActualizar = findViewById(R.id.editFotoEquipo)
         botonImagenGuardar = findViewById(R.id.guardarFotoEquipo)
     }
