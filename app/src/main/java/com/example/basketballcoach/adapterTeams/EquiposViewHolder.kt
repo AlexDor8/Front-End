@@ -1,4 +1,7 @@
 package com.example.basketballcoach.adapterTeams
 
-class EquiposViewHolder {
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+
+class EquiposViewHolder(view: View): RecyclerView.ViewHolder(view) {
 }
