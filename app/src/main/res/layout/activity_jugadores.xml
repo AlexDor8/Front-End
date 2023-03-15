@@ -7,6 +7,21 @@
     android:background="#060605"
     tools:context=".Jugadores">
 
+    <ImageButton
+        android:id="@+id/nuevoJugador"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="181dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="182dp"
+        android:background="@null"
+        android:contentDescription="@string/email"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerJugadores"
+        app:srcCompat="@drawable/mas" />
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchViewJugadores"
         android:layout_width="match_parent"
@@ -36,7 +51,6 @@
         android:layout_above="@+id/bottomNav"
         />
 
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
@@ -48,6 +62,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@drawable/items_toolbar"
         app:backgroundTint="@color/orange3"
-        android:scrollIndicators="left"/>
+        android:scrollIndicators="left">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

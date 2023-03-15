@@ -13,9 +13,12 @@ class JugadoresViewHolder(view: View):RecyclerView.ViewHolder(view) {
     val fotoJugador = view.findViewById<ImageView>(R.id.fotoJugadorRV)
     val nombreJugador = view.findViewById<TextView>(R.id.nombreJugadorRV)
 
-    fun itemPorListado(jugador: Jugador) {
+    fun itemPorListado(jugador: Jugador, onClickListener: (Jugador) -> Unit) {
         nombreJugador.text = jugador.nombre + " " + jugador.apellido
         Glide.with(fotoJugador.context).load(jugador.foto).into(fotoJugador)
+        itemView.setOnClickListener {
+            onClickListener(jugador)
+        }
     }
 
 }

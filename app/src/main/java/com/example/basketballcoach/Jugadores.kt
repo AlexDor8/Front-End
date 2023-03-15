@@ -3,6 +3,7 @@ package com.example.basketballcoach
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -102,9 +103,13 @@ class Jugadores : AppCompatActivity() {
     private fun inicializacionRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerJugadores)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        jugadoresRvAdapter = JugadoresAdapter(listaJugadores)
+        jugadoresRvAdapter = JugadoresAdapter(listaJugadores) { onItemSelected(it) }
         recyclerView.adapter = jugadoresRvAdapter
 
+    }
+
+    private fun onItemSelected(jugador: Jugador) {
+        Toast.makeText(applicationContext, jugador.nombre, Toast.LENGTH_LONG).show();
     }
 
     private fun conexion() {

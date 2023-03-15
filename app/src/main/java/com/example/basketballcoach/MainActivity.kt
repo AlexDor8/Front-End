@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         aboutus.setOnClickListener {
-            val intent: Intent = Intent(this, AboutUs::class.java);
+            val intent: Intent = Intent(this, Jugadores::class.java);
             startActivity(intent);
         }
     }
