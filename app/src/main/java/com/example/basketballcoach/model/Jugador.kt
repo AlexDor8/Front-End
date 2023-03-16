@@ -1,5 +1,7 @@
 package com.example.basketballcoach.model
 
+import java.io.Serializable
+
 data class Jugador(
     val id: Int,
     val nombre: String,
@@ -12,5 +14,5 @@ data class Jugador(
     val manoDominante: String,
     val foto: String,
     val equipo: Equipo
-) {
+) :Serializable{
 }

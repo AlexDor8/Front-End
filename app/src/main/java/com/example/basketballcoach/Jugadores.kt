@@ -3,6 +3,7 @@ package com.example.basketballcoach
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -56,12 +57,14 @@ class Jugadores : AppCompatActivity() {
     private lateinit var jugadoresRvAdapter: JugadoresAdapter
 
     lateinit var bottomNav : BottomNavigationView
+    lateinit var buttonJugador: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jugadores)
 
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        buttonJugador = findViewById(R.id.nuevoJugador)
 
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
@@ -94,6 +97,11 @@ class Jugadores : AppCompatActivity() {
 
         }
 
+        buttonJugador.setOnClickListener {
+            val intent: Intent = Intent(this, AnadirJugador::class.java);
+            startActivity(intent);
+        }
+
 
         inicializacionRecyclerView()
         conexion()
@@ -110,6 +118,9 @@ class Jugadores : AppCompatActivity() {
 
     private fun onItemSelected(jugador: Jugador) {
         Toast.makeText(applicationContext, jugador.nombre, Toast.LENGTH_LONG).show();
+        val intent: Intent = Intent(this, ActualizarJugador::class.java);
+        intent.putExtra("jugadorActualizar", jugador)
+        startActivity(intent);
     }
 
     private fun conexion() {

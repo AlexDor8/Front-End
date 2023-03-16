@@ -1,5 +1,6 @@
 package com.example.basketballcoach
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -43,6 +44,7 @@ class AnadirJugador : AppCompatActivity() {
             val altJugador = altura.text.toString().toInt()
             val mJugador = manoDominante.text.toString()
                     conexion(nJugador, aJugador, pJugador, dJugador, rJugador, sJugador, altJugador, mJugador)
+
         }
     }
 
@@ -60,6 +62,8 @@ class AnadirJugador : AppCompatActivity() {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())
                     Toast.makeText(applicationContext, "El usuario ha sido añadido con éxito!", Toast.LENGTH_LONG).show();
+                    val intent: Intent = Intent(this@AnadirJugador, Jugadores::class.java);
+                    startActivity(intent);
                 }else {
                     respuesta.errorBody()?.string()
                 }

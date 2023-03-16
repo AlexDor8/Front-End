@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import com.example.basketballcoach.model.Jugador
 
 
 class ActualizarJugador : AppCompatActivity() {
@@ -50,5 +51,20 @@ class ActualizarJugador : AppCompatActivity() {
         buttonActAlt = findViewById<ImageButton>(R.id.buttonActualizarJugadorAltura)
         buttonActManDom = findViewById<ImageButton>(R.id.buttonActualizarJugadorManoDominante)
 
+        setData()
+
+    }
+
+    fun setData() {
+        val jugador: Jugador = intent.getSerializableExtra("jugadorActualizar") as Jugador
+
+        nombreActualizarJugador.setText(jugador.nombre)
+        apellidoActualizarJugador.setText(jugador.apellido)
+        posicionActualizarJugador.setText(jugador.posicion)
+        dorsalActualizarJugador.setText(jugador.dorsal.toString())
+        rolActualizarJugador.setText(jugador.rol)
+        saludActualizarJugador.setText(jugador.salud)
+        alturaActualizarJugador.setText(jugador.altura.toString())
+        manoDominanteActualizarJugador.setText(jugador.manoDominante)
     }
 }
