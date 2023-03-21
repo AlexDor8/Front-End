@@ -23,7 +23,6 @@ import java.util.*
 
 
 class Register : AppCompatActivity() {
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -31,7 +30,6 @@ class Register : AppCompatActivity() {
         postRegisterUsuario()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun postRegisterUsuario() {
         val registerNombreUsuario = findViewById<EditText>(R.id.nombreUsuarioRegister)
         val password = findViewById<EditText>(R.id.passwordRegister)
@@ -50,16 +48,15 @@ class Register : AppCompatActivity() {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun validacionDatos(registerNombreUsuario:EditText, password:EditText, repiteContrasena:EditText, email:EditText, fechaNacimiento:EditText) {
         val nombreUsuario = registerNombreUsuario.text.toString()
         val contrasena = password.text.toString()
         val repitePassword = repiteContrasena.text.toString()
         val mail = email.text.toString()
         val nacimiento = fechaNacimiento.text.toString()
-        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        //val formatter = SimpleDateFormat("yyyy-MM-dd")
 
-        val fecha = formatter.parse(nacimiento)
+        //val fecha = formatter.parse(nacimiento)
 
 
 
@@ -71,11 +68,11 @@ class Register : AppCompatActivity() {
         }else {
             var userExiste = usuarioExiste(registerNombreUsuario, nombreUsuario, contrasena, mail, nacimiento)
             println("Este usuario existe?$userExiste")
-            if (contrasena.length<8) {
+            if (contrasena != repitePassword) {
+                repiteContrasena.error = "Las contraseñas no coinciden"
+            }else if (contrasena.length<8) {
                 password.error = "La contraseña tiene que tenir mínimo 8 caracteres"
-                if (contrasena != repitePassword) {
-                    repiteContrasena.error = "Las contraseñas no coinciden"
-                }
+
             }else if (!emailRegex.toRegex().matches(mail)){
                 email.error = "Introduce un email correcto"
             }else if(userExiste){

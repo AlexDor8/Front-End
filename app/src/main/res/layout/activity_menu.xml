@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Menu"
+    android:background="@color/fondo">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_rounded_grey"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/menuFotoUsuario"
+            android:layout_width="170dp"
+            android:layout_height="203dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/menuNombreEquipo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/foto_alex" />
+
+        <TextView
+            android:id="@+id/menuNombreUsuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="81dp"
+            android:layout_marginBottom="10dp"
+            android:text="Alejandro"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            app:fontFamily="sans-serif-black"
+            app:layout_constraintBottom_toTopOf="@+id/menuNombreEquipo"
+            app:layout_constraintEnd_toStartOf="@+id/menuFotoUsuario"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/menuNombreEquipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="13dp"
+            android:layout_marginBottom="10dp"
+            android:text="Golden State Warriors"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toTopOf="@+id/menuLogoEquipo"
+            app:layout_constraintEnd_toStartOf="@+id/menuFotoUsuario"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/menuLogoEquipo"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginEnd="83dp"
+            android:layout_marginBottom="37dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/menuFotoUsuario"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/logo" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/button_rounded_grey"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="9dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/circuloEditar"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/circulo" />
+
+                        <ImageView
+                            android:id="@+id/iconoMenuEditar"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/circuloEditar"
+                            app:layout_constraintEnd_toEndOf="@+id/circuloEditar"
+                            app:layout_constraintStart_toStartOf="@+id/circuloEditar"
+                            app:layout_constraintTop_toTopOf="@+id/circuloEditar"
+                            app:srcCompat="@drawable/boligrafo" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/textoEditar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Editar"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/circuloJugadores"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/circulo" />
+
+                        <ImageView
+                            android:id="@+id/iconoMenuJugadores"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/circuloJugadores"
+                            app:layout_constraintEnd_toEndOf="@+id/circuloJugadores"
+                            app:layout_constraintStart_toStartOf="@+id/circuloJugadores"
+                            app:layout_constraintTop_toTopOf="@+id/circuloJugadores"
+                            app:srcCompat="@drawable/jugadores" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/textoJugadores"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Jugadores"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/circuloCalendario"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/circulo" />
+
+                        <ImageView
+                            android:id="@+id/iconoMenuCalendario"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/circuloCalendario"
+                            app:layout_constraintEnd_toEndOf="@+id/circuloCalendario"
+                            app:layout_constraintStart_toStartOf="@+id/circuloCalendario"
+                            app:layout_constraintTop_toTopOf="@+id/circuloCalendario"
+                            app:srcCompat="@drawable/calendario" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/textoCalendario"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Calendario"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/circuloPizarra"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/circulo" />
+
+                        <ImageView
+                            android:id="@+id/iconoMenuPizarra"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/circuloPizarra"
+                            app:layout_constraintEnd_toEndOf="@+id/circuloPizarra"
+                            app:layout_constraintStart_toStartOf="@+id/circuloPizarra"
+                            app:layout_constraintTop_toTopOf="@+id/circuloPizarra"
+                            app:srcCompat="@drawable/entrenamientopizarra" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/textoPizarra"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pizarra"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/circuloEstadisticas"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/circulo" />
+
+                        <ImageView
+                            android:id="@+id/iconoEstadisticas"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/circuloEstadisticas"
+                            app:layout_constraintEnd_toEndOf="@+id/circuloEstadisticas"
+                            app:layout_constraintStart_toStartOf="@+id/circuloEstadisticas"
+                            app:layout_constraintTop_toTopOf="@+id/circuloEstadisticas"
+                            app:srcCompat="@drawable/estadisticas" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/textoEstadisticas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Estadisticas"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="10dp"
+                    >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/circuloAlineacion"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/circulo" />
+
+                        <ImageView
+                            android:id="@+id/iconoMenuAlineacion"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/circuloAlineacion"
+                            app:layout_constraintEnd_toEndOf="@+id/circuloAlineacion"
+                            app:layout_constraintStart_toStartOf="@+id/circuloAlineacion"
+                            app:layout_constraintTop_toTopOf="@+id/circuloAlineacion"
+                            app:srcCompat="@drawable/alineacion" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/textoAlineacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Alineación"
+                        android:textSize="18dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        />
+
+                </LinearLayout>
+            </TableRow>
+
+        </TableLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
