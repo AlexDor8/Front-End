@@ -69,7 +69,7 @@ class Profile : AppCompatActivity() {
                     true
                 }
                 R.id.iconoJugadores -> {
-                    val intent: Intent = Intent(this@Profile, Jugadores::class.java);
+                    val intent: Intent = Intent(this@Profile, Equipos::class.java);
                     startActivity(intent);
                     //loadFragment(EquipoFragment())
                     true

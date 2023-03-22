@@ -1,5 +1,6 @@
 package com.example.basketballcoach
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -59,6 +60,8 @@ class AnadirEquipo : AppCompatActivity() {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())
                     Toast.makeText(applicationContext, "El equipo ha sido añadido con éxito!", Toast.LENGTH_LONG).show();
+                    val intent: Intent = Intent(this@AnadirEquipo, Equipos::class.java);
+                    startActivity(intent);
                 }else {
                     respuesta.errorBody()?.string()
                 }

@@ -61,7 +61,7 @@ class AnadirJugador : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())
-                    Toast.makeText(applicationContext, "El usuario ha sido añadido con éxito!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(applicationContext, "El jugador ha sido añadido con éxito!", Toast.LENGTH_LONG).show();
                     val intent: Intent = Intent(this@AnadirJugador, Jugadores::class.java);
                     startActivity(intent);
                 }else {
