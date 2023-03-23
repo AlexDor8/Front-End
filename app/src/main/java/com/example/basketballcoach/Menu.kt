@@ -1,10 +1,15 @@
 package com.example.basketballcoach
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import com.example.basketballcoach.model.Equipo
+import com.example.basketballcoach.model.Globals
+import com.example.basketballcoach.model.Jugador
 
 class Menu : AppCompatActivity() {
 
@@ -14,6 +19,13 @@ class Menu : AppCompatActivity() {
     lateinit var menuPizarra:ImageView
     lateinit var menuJugadores:ImageView
     lateinit var menuAlineacion:ImageView
+
+    lateinit var imagenUsuario: ImageView
+    lateinit var nombreUsuario: TextView
+    lateinit var nombreEquipo: TextView
+    lateinit var imagenEquipo: ImageView
+
+    lateinit var equipo: Equipo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +37,11 @@ class Menu : AppCompatActivity() {
         menuEstadisticas = findViewById(R.id.circuloEstadisticas)
         menuPizarra = findViewById(R.id.circuloPizarra)
         menuJugadores = findViewById(R.id.circuloJugadores)
+
+        imagenUsuario = findViewById(R.id.menuFotoUsuario)
+        nombreUsuario = findViewById(R.id.menuNombreUsuario)
+        nombreEquipo = findViewById(R.id.menuNombreEquipo)
+        imagenEquipo = findViewById(R.id.menuLogoEquipo)
 
         menuEditar.setOnClickListener {
             val intent: Intent = Intent(this, ActualizarEquipo::class.java);
@@ -40,5 +57,17 @@ class Menu : AppCompatActivity() {
             val intent: Intent = Intent(this, Jugadores::class.java);
             startActivity(intent);
         }
+
+        setData()
+    }
+
+    private fun setData() {
+
+        equipo = intent.getSerializableExtra("menuEquipo") as Equipo
+
+        imagenUsuario.setImageURI(Uri.parse(Globals.usuario.foto))
+        nombreUsuario.text = Globals.usuario.nombre
+        nombreEquipo.text = equipo.nombre
+        imagenEquipo.setImageURI(Uri.parse(equipo.foto))
     }
 }

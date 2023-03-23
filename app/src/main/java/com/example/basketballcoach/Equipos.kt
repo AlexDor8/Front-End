@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basketballcoach.adapterTeam.JugadoresAdapter
@@ -53,8 +54,15 @@ class Equipos : AppCompatActivity() {
     private fun inicializacionRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerEquipos)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        equiposRvAdapter = EquiposAdapter(listaEquipos)
+        equiposRvAdapter = EquiposAdapter(listaEquipos) { onItemSelected(it) }
         recyclerView.adapter = equiposRvAdapter
+    }
+
+    private fun onItemSelected(equipo: Equipo) {
+        Toast.makeText(applicationContext, equipo.nombre, Toast.LENGTH_LONG).show();
+        val intent: Intent = Intent(this, Menu::class.java);
+        intent.putExtra("menuEquipo", equipo)
+        startActivity(intent);
     }
 
     private fun conexion() {

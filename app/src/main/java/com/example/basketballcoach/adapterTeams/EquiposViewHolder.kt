@@ -14,9 +14,12 @@ class EquiposViewHolder(view: View): RecyclerView.ViewHolder(view) {
     val fotoEquipo = view.findViewById<ImageView>(R.id.fotoEquipoRV)
     val nombreEquipo = view.findViewById<TextView>(R.id.nombreEquipoRV)
 
-    fun itemPorListado(equipo: Equipo) {
+    fun itemPorListado(equipo: Equipo, onClickListener: (Equipo) -> Unit) {
         nombreEquipo.text = equipo.nombre
         Glide.with(fotoEquipo.context).load(equipo.foto).into(fotoEquipo)
+        itemView.setOnClickListener {
+            onClickListener(equipo)
+        }
     }
 
 }
