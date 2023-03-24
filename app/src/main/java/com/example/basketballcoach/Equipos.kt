@@ -60,8 +60,8 @@ class Equipos : AppCompatActivity() {
 
     private fun onItemSelected(equipo: Equipo) {
         Toast.makeText(applicationContext, equipo.nombre, Toast.LENGTH_LONG).show();
+        Globals.equipo = equipo
         val intent: Intent = Intent(this, Menu::class.java);
-        intent.putExtra("menuEquipo", equipo)
         startActivity(intent);
     }
 

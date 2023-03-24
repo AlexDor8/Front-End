@@ -2,14 +2,17 @@ package com.example.basketballcoach
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.basketballcoach.model.Equipo
 import com.example.basketballcoach.model.Globals
 import com.example.basketballcoach.model.UpdateFoto
+import com.example.basketballcoach.model.UpdateUser
 import com.example.basketballcoach.retrofit.APIService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,6 +33,7 @@ class ActualizarEquipo : AppCompatActivity() {
     lateinit var botonImagenActualizar:ImageButton
     lateinit var botonImagenGuardar: ImageButton
 
+
     val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri!=null) {
             imagenEquipoActualizar.setImageURI(uri)
@@ -47,7 +51,19 @@ class ActualizarEquipo : AppCompatActivity() {
         botonActualizarNombre = findViewById<ImageButton>(R.id.buttonActualizarNombreEquipo)
         botonImagenActualizar = findViewById(R.id.editFotoEquipo)
         botonImagenGuardar = findViewById(R.id.guardarFotoEquipo)
+
+        actualizarEquipoNombre.setText(Globals.equipo.nombre)
+        imagenEquipoActualizar.setImageURI(Uri.parse(Globals.equipo.foto))
+
+        botonActualizarNombre.setOnClickListener {
+            var nuevoEquipoNombre = actualizarEquipoNombre.text.toString()
+            conexionCambiarNombre(Globals.equipo.id, nuevoEquipoNombre)
+        }
+
+        cambiarFotoEuipo()
     }
+
+
 
     fun cambiarFotoEuipo() {
         botonImagenActualizar.setOnClickListener {
@@ -74,7 +90,8 @@ class ActualizarEquipo : AppCompatActivity() {
                 outputStream.close()
 
             }
-            //conexionGuardarFoto(,  pathImage)
+
+            conexionGuardarFoto(Globals.equipo.id,  pathImage)
 
 
         }
@@ -87,11 +104,30 @@ class ActualizarEquipo : AppCompatActivity() {
             val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
             val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
                 GsonConverterFactory.create()).client(client).build()
-            var respuesta = conexion.create(APIService::class.java).editFoto("baloncesto/cFoto", UpdateFoto(id, imagen))
+            var respuesta = conexion.create(APIService::class.java).editFoto("baloncesto/cFotoEquipo", UpdateFoto(id, imagen))
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())
                     Toast.makeText(applicationContext, "La foto ha sido cambiada!", Toast.LENGTH_LONG).show();
+                }else {
+                    respuesta.errorBody()?.string()
+                }
+            }
+        }
+    }
+
+    fun conexionCambiarNombre(id: Int, nombre: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+            val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
+                GsonConverterFactory.create()).client(client).build()
+            var respuesta = conexion.create(APIService::class.java).editName("baloncesto/cNombreEquipo", UpdateUser(id, nombre))
+            withContext(Dispatchers.Main) {
+                if (respuesta.isSuccessful) {
+                    println(respuesta.body())
+                    Toast.makeText(applicationContext, "El nombre ha sido cambiado", Toast.LENGTH_LONG).show();
                 }else {
                     respuesta.errorBody()?.string()
                 }

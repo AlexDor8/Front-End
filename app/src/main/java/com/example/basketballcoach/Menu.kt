@@ -25,7 +25,6 @@ class Menu : AppCompatActivity() {
     lateinit var nombreEquipo: TextView
     lateinit var imagenEquipo: ImageView
 
-    lateinit var equipo: Equipo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +41,7 @@ class Menu : AppCompatActivity() {
         nombreUsuario = findViewById(R.id.menuNombreUsuario)
         nombreEquipo = findViewById(R.id.menuNombreEquipo)
         imagenEquipo = findViewById(R.id.menuLogoEquipo)
+
 
         menuEditar.setOnClickListener {
             val intent: Intent = Intent(this, ActualizarEquipo::class.java);
@@ -62,12 +62,9 @@ class Menu : AppCompatActivity() {
     }
 
     private fun setData() {
-
-        equipo = intent.getSerializableExtra("menuEquipo") as Equipo
-
         imagenUsuario.setImageURI(Uri.parse(Globals.usuario.foto))
         nombreUsuario.text = Globals.usuario.nombre
-        nombreEquipo.text = equipo.nombre
-        imagenEquipo.setImageURI(Uri.parse(equipo.foto))
+        nombreEquipo.text = Globals.equipo.nombre
+        imagenEquipo.setImageURI(Uri.parse(Globals.equipo.foto))
     }
 }

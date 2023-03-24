@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.basketballcoach.adapter.IntegrantesAdapter
 import com.example.basketballcoach.adapterTeam.JugadoresAdapter
 import com.example.basketballcoach.model.Equipo
+import com.example.basketballcoach.model.Globals
 import com.example.basketballcoach.model.Jugador
 import com.example.basketballcoach.retrofit.APIService
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -59,9 +60,12 @@ class Jugadores : AppCompatActivity() {
     lateinit var bottomNav : BottomNavigationView
     lateinit var buttonJugador: ImageButton
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jugadores)
+
+
 
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         buttonJugador = findViewById(R.id.nuevoJugador)
@@ -71,12 +75,13 @@ class Jugadores : AppCompatActivity() {
                 R.id.iconoJugador -> {
                     //loadFragment(PerfilFragment())
 
-                    val intent: Intent = Intent(this@Jugadores, Profile::class.java);
+                    val intent: Intent = Intent(this, Profile::class.java);
                     startActivity(intent);
                     true
                 }
                 R.id.iconoJugadores -> {
-                    startActivity(intent)
+                    val intent: Intent = Intent(this, Equipos::class.java);
+                    startActivity(intent);
                     //loadFragment(EquipoFragment())
                     true
                 }
@@ -130,7 +135,7 @@ class Jugadores : AppCompatActivity() {
             val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
             val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
                 GsonConverterFactory.create()).client(client).build()
-            var respuesta = conexion.create(APIService::class.java).getJugadores("baloncesto/getJugadores/1")
+            var respuesta = conexion.create(APIService::class.java).getJugadores("baloncesto/getJugadores/${Globals.equipo.id}")
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     val nuevosJugadores = respuesta.body() ?: emptyList()

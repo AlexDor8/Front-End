@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.example.basketballcoach.model.Equipo
 import com.example.basketballcoach.model.Globals
-import com.example.basketballcoach.model.Jugador
 import com.example.basketballcoach.retrofit.APIService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

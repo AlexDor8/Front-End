@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import com.example.basketballcoach.model.Equipo
+import com.example.basketballcoach.model.Globals
 import com.example.basketballcoach.model.Jugador
 import com.example.basketballcoach.retrofit.APIService
 import kotlinx.coroutines.CoroutineScope
@@ -57,7 +57,7 @@ class AnadirJugador : AppCompatActivity() {
                 .addConverterFactory(
                     GsonConverterFactory.create()).client(client).build()
             var respuesta = conexion.create(APIService::class.java)
-                .anadirJugador("baloncesto/anadirJugador", Jugador(0, nombre, primerApellido, posicion, dorsal, rol, salud, altura, manoDominante, "", Equipo(1, "Golden State Warriors", 1, "")))
+                .anadirJugador("baloncesto/anadirJugador", Jugador(0, nombre, primerApellido, posicion, dorsal, rol, salud, altura, manoDominante, "", Equipo(Globals.equipo.id, Globals.equipo.nombre, Globals.usuario.id, Globals.equipo.foto)))
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     println(respuesta.body())
