@@ -32,6 +32,27 @@ interface APIService {
     suspend fun editName(@Url url: String, @Body updateUser: UpdateUser) : Response<Feedback>
 
     @PUT
+    suspend fun editSurname(@Url url: String, @Body updateApellido: UpadteApellido) : Response<Feedback>
+
+    @PUT
+    suspend fun editPosition(@Url url: String, @Body updatePosicion: UpdatePosicion) : Response<Feedback>
+
+    @PUT
+    suspend fun editDorsal(@Url url: String, @Body updateDorsal: UpdateDorsal) : Response<Feedback>
+
+    @PUT
+    suspend fun editRol(@Url url: String, @Body updateRol: UpdateRol) : Response<Feedback>
+
+    @PUT
+    suspend fun editSalud(@Url url: String, @Body updateSalud: UpdateSalud) : Response<Feedback>
+
+    @PUT
+    suspend fun editAltura(@Url url: String, @Body updateAltura: UpdateAltura) : Response<Feedback>
+
+    @PUT
+    suspend fun editManodDominante(@Url url: String, @Body updateManoDominante: UpdateManoDominante) : Response<Feedback>
+
+    @PUT
     suspend fun editEmail(@Url url: String, @Body updateEmail: UpdateEmail) : Response<Feedback>
 
     @PUT
