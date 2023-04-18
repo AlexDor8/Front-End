@@ -58,6 +58,11 @@ class Menu : AppCompatActivity() {
             startActivity(intent);
         }
 
+        menuPizarra.setOnClickListener {
+            val intent: Intent = Intent(this, Alineacion::class.java);
+            startActivity(intent);
+        }
+
         setData()
     }
 

@@ -7,8 +7,21 @@
     android:background="#060605"
     tools:context=".Equipos">
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@drawable/items_toolbar"
+        app:backgroundTint="@color/orange3"
+        android:scrollIndicators="left"/>
+
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchViewJugadores"
+        android:id="@+id/searchViewEquipos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="17dp"

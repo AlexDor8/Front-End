@@ -59,8 +59,6 @@ class Profile : AppCompatActivity() {
 
         bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 
-
-
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.iconoJugador -> {
@@ -84,7 +82,7 @@ class Profile : AppCompatActivity() {
                     true
                 }
                 else -> {
-                    loadFragment(PistaFragment())
+                    println("Clica alguno de los iconos del menu")
                     true
                 }
             }

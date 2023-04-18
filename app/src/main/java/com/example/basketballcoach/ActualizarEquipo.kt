@@ -1,5 +1,6 @@
 package com.example.basketballcoach
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
@@ -14,6 +15,7 @@ import com.example.basketballcoach.model.Globals
 import com.example.basketballcoach.model.UpdateFoto
 import com.example.basketballcoach.model.UpdateUser
 import com.example.basketballcoach.retrofit.APIService
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,6 +35,8 @@ class ActualizarEquipo : AppCompatActivity() {
     lateinit var botonImagenActualizar:ImageButton
     lateinit var botonImagenGuardar: ImageButton
 
+    lateinit var bottomNav : BottomNavigationView
+
 
     val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri!=null) {
@@ -45,6 +49,39 @@ class ActualizarEquipo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actualizar_equipo)
+
+        bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+
+        bottomNav.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.iconoJugador -> {
+                    //loadFragment(PerfilFragment())
+
+                    val intent: Intent = Intent(this, Profile::class.java);
+                    startActivity(intent);
+                    true
+                }
+                R.id.iconoJugadores -> {
+                    val intent: Intent = Intent(this, Equipos::class.java);
+                    startActivity(intent);
+                    //loadFragment(EquipoFragment())
+                    true
+                }
+                R.id.iconoPista -> {
+                    //loadFragment(PistaFragment())
+                    true
+                }
+                R.id.iconoCalendario -> {
+                    val intent: Intent = Intent(this, Calendar::class.java);
+                    startActivity(intent);
+                    true
+                }
+                else -> {
+                    println("Clica alguno de los iconos del menu")
+                    true
+                }
+            }
+        }
 
         actualizarEquipoNombre = findViewById<EditText>(R.id.nombreEquipoActualizar)
         imagenEquipoActualizar = findViewById<ImageView>(R.id.imagenEquipoActualizar)

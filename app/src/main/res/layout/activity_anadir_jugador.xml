@@ -7,6 +7,7 @@
     tools:context=".AnadirJugador"
     android:background="@color/fondo">
 
+
     <EditText
         android:id="@+id/nombreJugador"
         android:layout_width="300dp"

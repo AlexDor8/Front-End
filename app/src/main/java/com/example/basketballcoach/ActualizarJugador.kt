@@ -1,5 +1,6 @@
 package com.example.basketballcoach
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.example.basketballcoach.model.*
 import com.example.basketballcoach.retrofit.APIService
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,9 +42,44 @@ class ActualizarJugador : AppCompatActivity() {
 
     lateinit var jugador:Jugador
 
+    lateinit var bottomNav : BottomNavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actualizar_jugador)
+
+        bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+
+        bottomNav.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.iconoJugador -> {
+                    //loadFragment(PerfilFragment())
+
+                    val intent: Intent = Intent(this, Profile::class.java);
+                    startActivity(intent);
+                    true
+                }
+                R.id.iconoJugadores -> {
+                    val intent: Intent = Intent(this, Equipos::class.java);
+                    startActivity(intent);
+                    //loadFragment(EquipoFragment())
+                    true
+                }
+                R.id.iconoPista -> {
+                    //loadFragment(PistaFragment())
+                    true
+                }
+                R.id.iconoCalendario -> {
+                    val intent: Intent = Intent(this, Calendar::class.java);
+                    startActivity(intent);
+                    true
+                }
+                else -> {
+                    println("Clica alguno de los iconos del menu")
+                    true
+                }
+            }
+        }
 
         nombreActualizarJugador = findViewById(R.id.nombreJugadorActualizar)
         apellidoActualizarJugador = findViewById<EditText>(R.id.apellidoJugadorActualizar)

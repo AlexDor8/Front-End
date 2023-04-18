@@ -65,10 +65,8 @@ class Jugadores : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jugadores)
 
-
-
-        bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         buttonJugador = findViewById(R.id.nuevoJugador)
+        bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
@@ -99,7 +97,6 @@ class Jugadores : AppCompatActivity() {
                     true
                 }
             }
-
         }
 
         buttonJugador.setOnClickListener {
