@@ -4,22 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Alineacion">
+    tools:context=".Alineacion"
+    android:background="@color/fondo">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/pistacompleta"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pistacompleta" />
 
-        <ImageView
-            android:id="@+id/mediapista"
-            android:layout_width="480dp"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/pistabaloncesto" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/base"
+        android:layout_width="67dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="412dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pistacompleta"
+        app:srcCompat="@drawable/camisetadebaloncesto" />
+
+    <Spinner
+        android:id="@+id/spinnerBase"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/altura"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/base"
+        />
+
+    <ImageView
+        android:id="@+id/alero"
+        android:layout_width="67dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="476dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.165"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pistacompleta"
+        app:srcCompat="@drawable/camisetadebaloncesto" />
+
+    <Spinner
+        android:id="@+id/spinnerAlero"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/altura"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.089"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alero" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -79,4 +79,7 @@ interface APIService {
 
     @POST
     suspend fun anadirEquipo(@Url url: String, @Body equipo: Equipo) : Response<Feedback>
+
+    @GET
+    suspend fun getNombresPosicion(@Url url: String): Response<List<String>>
 }

@@ -43,6 +43,8 @@ class Menu : AppCompatActivity() {
         imagenEquipo = findViewById(R.id.menuLogoEquipo)
 
 
+        setData()
+
         menuEditar.setOnClickListener {
             val intent: Intent = Intent(this, ActualizarEquipo::class.java);
             startActivity(intent);
@@ -58,12 +60,12 @@ class Menu : AppCompatActivity() {
             startActivity(intent);
         }
 
-        menuPizarra.setOnClickListener {
+        menuAlineacion.setOnClickListener {
             val intent: Intent = Intent(this, Alineacion::class.java);
             startActivity(intent);
         }
 
-        setData()
+
     }
 
     private fun setData() {
