@@ -7,62 +7,68 @@
     android:background="#060605"
     tools:context=".Jugadores">
 
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchViewJugadores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="17dp"
+                android:background="@drawable/search_view_appearance"></androidx.appcompat.widget.SearchView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerJugadores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.15"
+                tools:layout_editor_absoluteX="16dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
     <ImageButton
         android:id="@+id/nuevoJugador"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="181dp"
-        android:layout_marginTop="33dp"
         android:layout_marginEnd="182dp"
+        android:layout_marginBottom="16dp"
         android:background="@null"
         android:contentDescription="@string/email"
         android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerJugadores"
         app:srcCompat="@drawable/mas" />
-
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchViewJugadores"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
-        android:background="@drawable/search_view_appearance"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerJugadores"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"></androidx.appcompat.widget.SearchView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerJugadores"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15"
-        tools:layout_editor_absoluteX="16dp">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottomNav"
-        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
+        android:scrollIndicators="left"
+        app:backgroundTint="@color/orange3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@drawable/items_toolbar"
-        app:backgroundTint="@color/orange3"
-        android:scrollIndicators="left">
+        app:menu="@drawable/items_toolbar">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
