@@ -82,4 +82,7 @@ interface APIService {
 
     @GET
     suspend fun getNombresPosicion(@Url url: String): Response<List<String>>
+
+    @GET
+    suspend fun getFoto(@Url url: String): Response<Feedback>
 }

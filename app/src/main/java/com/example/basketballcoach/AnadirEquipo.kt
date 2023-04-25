@@ -3,10 +3,10 @@ package com.example.basketballcoach
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.util.Log
+import android.widget.*
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.basketballcoach.model.Equipo
 import com.example.basketballcoach.model.Globals
 import com.example.basketballcoach.retrofit.APIService
@@ -20,6 +20,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class AnadirEquipo : AppCompatActivity() {
+
 
     lateinit var nombreEquipo: EditText
     lateinit var anadirEquipo: Button
@@ -43,6 +44,7 @@ class AnadirEquipo : AppCompatActivity() {
             }
 
         }
+
     }
 
     fun conexion(nombreEquipo: String) {

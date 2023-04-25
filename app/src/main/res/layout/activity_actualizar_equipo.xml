@@ -33,7 +33,7 @@
         app:srcCompat="@drawable/usuario" />
 
     <ImageButton
-        android:id="@+id/editFotoEquipo"
+        android:id="@+id/botonEditFotoEquipo"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="17dp"
@@ -50,7 +50,7 @@
         app:srcCompat="@drawable/editar" />
 
     <ImageButton
-        android:id="@+id/guardarFotoEquipo"
+        android:id="@+id/botonGuardarFotoEquipo"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="17dp"
@@ -63,7 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/imagenEquipoActualizar"
-        app:layout_constraintTop_toBottomOf="@+id/editFotoEquipo"
+        app:layout_constraintTop_toBottomOf="@+id/botonEditFotoEquipo"
         app:srcCompat="@drawable/guardarfoto" />
 
     <EditText

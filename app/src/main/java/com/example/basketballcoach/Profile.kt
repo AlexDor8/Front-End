@@ -98,6 +98,7 @@ class Profile : AppCompatActivity() {
         val botonEmail = findViewById<ImageButton>(R.id.buttonEmail)
         val botonFecha = findViewById<ImageButton>(R.id.buttonFecha)
         val botonContra = findViewById<Button>(R.id.cambiarContrasena)
+
         botonImagen = findViewById(R.id.editFoto)
         botonImagen.setOnClickListener {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))

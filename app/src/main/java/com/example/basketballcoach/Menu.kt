@@ -10,6 +10,15 @@ import android.widget.Toast
 import com.example.basketballcoach.model.Equipo
 import com.example.basketballcoach.model.Globals
 import com.example.basketballcoach.model.Jugador
+import com.example.basketballcoach.retrofit.APIService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class Menu : AppCompatActivity() {
 
@@ -42,6 +51,7 @@ class Menu : AppCompatActivity() {
         nombreEquipo = findViewById(R.id.menuNombreEquipo)
         imagenEquipo = findViewById(R.id.menuLogoEquipo)
 
+        conexionFotoUsuario()
 
         setData()
 
@@ -73,5 +83,22 @@ class Menu : AppCompatActivity() {
         nombreUsuario.text = Globals.usuario.nombre
         nombreEquipo.text = Globals.equipo.nombre
         imagenEquipo.setImageURI(Uri.parse(Globals.equipo.foto))
+    }
+
+    private fun conexionFotoUsuario() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+            val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
+                GsonConverterFactory.create()).client(client).build()
+            var respuesta = conexion.create(APIService::class.java).getFoto("baloncesto/getFoto/${Globals.usuario.id}")
+            withContext(Dispatchers.Main) {
+                if (respuesta.isSuccessful) {
+                    val foto = respuesta.body()
+                    Globals.usuario.foto = foto.toString()
+                }
+            }
+        }
     }
 }

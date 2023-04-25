@@ -10,7 +10,6 @@ import android.util.Log
 import android.widget.*
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.basketballcoach.model.Equipo
 import com.example.basketballcoach.model.Globals
 import com.example.basketballcoach.model.UpdateFoto
 import com.example.basketballcoach.model.UpdateUser
@@ -86,8 +85,8 @@ class ActualizarEquipo : AppCompatActivity() {
         actualizarEquipoNombre = findViewById<EditText>(R.id.nombreEquipoActualizar)
         imagenEquipoActualizar = findViewById<ImageView>(R.id.imagenEquipoActualizar)
         botonActualizarNombre = findViewById<ImageButton>(R.id.buttonActualizarNombreEquipo)
-        botonImagenActualizar = findViewById(R.id.editFotoEquipo)
-        botonImagenGuardar = findViewById(R.id.guardarFotoEquipo)
+        botonImagenActualizar = findViewById(R.id.botonEditFotoEquipo)
+        botonImagenGuardar = findViewById(R.id.botonGuardarFotoEquipo)
 
         actualizarEquipoNombre.setText(Globals.equipo.nombre)
         imagenEquipoActualizar.setImageURI(Uri.parse(Globals.equipo.foto))
