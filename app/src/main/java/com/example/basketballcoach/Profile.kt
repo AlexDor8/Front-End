@@ -182,8 +182,6 @@ class Profile : AppCompatActivity() {
 
                             }
                             conexionGuardarFoto(usuario.id,  pathImage)
-
-
                         }
                     }
 

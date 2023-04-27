@@ -1,12 +1,18 @@
 package com.example.basketballcoach
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.example.basketballcoach.model.*
 import com.example.basketballcoach.retrofit.APIService
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -18,9 +24,23 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+import java.io.FileOutputStream
 
 
 class ActualizarJugador : AppCompatActivity() {
+
+    val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        if (uri!=null) {
+            imagen.setImageURI(uri)
+        }else {
+            Log.i("fotoPerfil", "No seleccionada")
+        }
+    }
+
+    lateinit var botonImagen :ImageButton
+    lateinit var saveImage: ImageButton
+    lateinit var imagen: ImageView
 
     lateinit var nombreActualizarJugador: EditText
     lateinit var apellidoActualizarJugador: EditText
@@ -30,7 +50,6 @@ class ActualizarJugador : AppCompatActivity() {
     lateinit var saludActualizarJugador: EditText
     lateinit var alturaActualizarJugador: EditText
     lateinit var manoDominanteActualizarJugador: EditText
-    lateinit var actulizarImagen: ImageView;
     lateinit var buttonActNom: ImageButton
     lateinit var buttonActApe: ImageButton
     lateinit var buttonActPos: ImageButton
@@ -81,6 +100,12 @@ class ActualizarJugador : AppCompatActivity() {
             }
         }
 
+        botonImagen = findViewById(R.id.editFoto)
+        botonImagen.setOnClickListener {
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+        }
+        imagen = findViewById(R.id.imagenJugadorActualizar)
+
         nombreActualizarJugador = findViewById(R.id.nombreJugadorActualizar)
         apellidoActualizarJugador = findViewById<EditText>(R.id.apellidoJugadorActualizar)
         posicionActualizarJugador = findViewById<EditText>(R.id.posicionJugadorActualizar)
@@ -89,7 +114,6 @@ class ActualizarJugador : AppCompatActivity() {
         saludActualizarJugador = findViewById<EditText>(R.id.saludActualizar)
         alturaActualizarJugador = findViewById<EditText>(R.id.alturaActualizar)
         manoDominanteActualizarJugador = findViewById<EditText>(R.id.manoDominanteActualizar)
-        actulizarImagen = findViewById<ImageView>(R.id.imagenJugadorActualizar)
 
         buttonActNom = findViewById<ImageButton>(R.id.buttonActualizarJugador)
         buttonActApe = findViewById<ImageButton>(R.id.buttonActualizarJugadorApellido)
@@ -100,7 +124,10 @@ class ActualizarJugador : AppCompatActivity() {
         buttonActAlt = findViewById<ImageButton>(R.id.buttonActualizarJugadorAltura)
         buttonActManDom = findViewById<ImageButton>(R.id.buttonActualizarJugadorManoDominante)
 
+        saveImage = findViewById(R.id.guardarFoto)
+
         setData()
+        cambiarFotoJugador()
         cambiarNombreJugador()
         cambiarApellidoJugador()
         cambiarPosicionJugador()
@@ -114,6 +141,7 @@ class ActualizarJugador : AppCompatActivity() {
     fun setData() {
         jugador = intent.getSerializableExtra("jugadorActualizar") as Jugador
 
+        Glide.with(imagen.context).load(jugador.foto).into(imagen)
         nombreActualizarJugador.setText(jugador.nombre)
         apellidoActualizarJugador.setText(jugador.apellido)
         posicionActualizarJugador.setText(jugador.posicion)
@@ -122,6 +150,49 @@ class ActualizarJugador : AppCompatActivity() {
         saludActualizarJugador.setText(jugador.salud)
         alturaActualizarJugador.setText(jugador.altura.toString())
         manoDominanteActualizarJugador.setText(jugador.manoDominante)
+    }
+
+    fun cambiarFotoJugador() {
+        saveImage.setOnClickListener {
+
+            var imageFile: File = File("")
+
+            var pathImage:String = "";
+
+            val drawable = imagen.drawable
+
+            if (drawable is BitmapDrawable) {
+                val bitmap = drawable.bitmap
+                val filesDir = applicationContext.filesDir
+                imageFile = File("$filesDir/$drawable")
+                pathImage= imageFile.toString()
+                println(pathImage)
+                val outputStream = FileOutputStream(imageFile)
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                outputStream.close()
+
+            }
+            conexionGuardarFoto(jugador.id,  pathImage)
+        }
+    }
+
+    fun conexionGuardarFoto(id: Int, foto: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+            val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
+                GsonConverterFactory.create()).client(client).build()
+            var respuesta = conexion.create(APIService::class.java).editFoto("baloncesto/cFotoJugador", UpdateFoto(id, foto))
+            withContext(Dispatchers.Main) {
+                if (respuesta.isSuccessful) {
+                    println(respuesta.body())
+                    Toast.makeText(applicationContext, "La foto ha sido cambiada", Toast.LENGTH_LONG).show();
+                }else {
+                    respuesta.errorBody()?.string()
+                }
+            }
+        }
     }
 
     fun cambiarNombreJugador() {

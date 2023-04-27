@@ -51,7 +51,7 @@ class Menu : AppCompatActivity() {
         nombreEquipo = findViewById(R.id.menuNombreEquipo)
         imagenEquipo = findViewById(R.id.menuLogoEquipo)
 
-        conexionFotoUsuario()
+        //conexionFotoUsuario()
 
         setData()
 
