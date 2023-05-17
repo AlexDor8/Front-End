@@ -70,6 +70,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/pistacompleta" />
+        <include layout="@layout/paint_view"></include>
     </RelativeLayout>
 
 </RelativeLayout>

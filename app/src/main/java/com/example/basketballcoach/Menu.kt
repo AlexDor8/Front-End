@@ -75,6 +75,11 @@ class Menu : AppCompatActivity() {
             startActivity(intent);
         }
 
+        menuPizarra.setOnClickListener {
+            val intent: Intent = Intent(this, Pizarra::class.java);
+            startActivity(intent);
+        }
+
 
     }
 
