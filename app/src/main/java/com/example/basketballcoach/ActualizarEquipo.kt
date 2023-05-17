@@ -67,7 +67,8 @@ class ActualizarEquipo : AppCompatActivity() {
                     true
                 }
                 R.id.iconoPista -> {
-                    //loadFragment(PistaFragment())
+                    val intent: Intent = Intent(this, Pizarra::class.java);
+                    startActivity(intent);
                     true
                 }
                 R.id.iconoCalendario -> {
