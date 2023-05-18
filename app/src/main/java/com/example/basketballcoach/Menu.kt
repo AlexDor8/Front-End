@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.basketballcoach.model.Equipo
 import com.example.basketballcoach.model.Globals
 import com.example.basketballcoach.model.Jugador
@@ -84,10 +85,16 @@ class Menu : AppCompatActivity() {
     }
 
     private fun setData() {
-        imagenUsuario.setImageURI(Uri.parse(Globals.usuario.foto))
+        Glide.with(imagenUsuario.context)
+            .load(Globals.usuario.foto)
+            .into(imagenUsuario);
+        //imagenUsuario.setImageURI(Uri.parse(Globals.usuario.foto))
         nombreUsuario.text = Globals.usuario.nombre
         nombreEquipo.text = Globals.equipo.nombre
-        imagenEquipo.setImageURI(Uri.parse(Globals.equipo.foto))
+        Glide.with(imagenEquipo.context)
+            .load(Globals.equipo.foto)
+            .into(imagenEquipo);
+        //imagenEquipo.setImageURI(Uri.parse(Globals.equipo.foto))
     }
 
     private fun conexionFotoUsuario() {

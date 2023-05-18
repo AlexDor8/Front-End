@@ -37,14 +37,6 @@ class AboutUs : AppCompatActivity() {
             informacion = "Interés por el código abierto y por \nmejorar como programador.",
             foto = ""
         ),
-        Integrantes(
-            id = 3,
-            nombre = "Tigé David Ral Ramirez",
-            especializacion = "Informe técnico",
-            informacion = "Me gusta expresar mi creatividad \na través del desarrollo de " +
-                    "software.\nY me satisface resolver problemas\nlógicos.",
-            foto = ""
-        )
     )
 
 
