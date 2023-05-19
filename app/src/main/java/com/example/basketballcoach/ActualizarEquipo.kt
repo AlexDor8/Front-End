@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.*
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.example.basketballcoach.model.Globals
 import com.example.basketballcoach.model.UpdateFoto
 import com.example.basketballcoach.model.UpdateUser
@@ -90,7 +91,8 @@ class ActualizarEquipo : AppCompatActivity() {
         botonImagenGuardar = findViewById(R.id.botonGuardarFotoEquipo)
 
         actualizarEquipoNombre.setText(Globals.equipo.nombre)
-        imagenEquipoActualizar.setImageURI(Uri.parse(Globals.equipo.foto))
+        //imagenEquipoActualizar.setImageURI(Uri.parse(Globals.equipo.foto))
+        Glide.with(imagenEquipoActualizar.context).load(Globals.equipo.foto).into(imagenEquipoActualizar)
 
         botonActualizarNombre.setOnClickListener {
             var nuevoEquipoNombre = actualizarEquipoNombre.text.toString()
