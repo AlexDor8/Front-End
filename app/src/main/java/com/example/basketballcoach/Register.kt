@@ -1,10 +1,12 @@
 package com.example.basketballcoach
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -20,9 +22,14 @@ import java.time.LocalDate
 import java.time.LocalDate.*
 import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.Calendar
 
 
 class Register : AppCompatActivity() {
+
+    lateinit var botonFecha: ImageView
+    lateinit var fechaNacimiento: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -35,10 +42,22 @@ class Register : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.passwordRegister)
         val repiteContrasena = findViewById<EditText>(R.id.repiteContraseña)
         val email = findViewById<EditText>(R.id.email)
-        val fechaNacimiento = findViewById<EditText>(R.id.fechaNacimiento)
+        fechaNacimiento = findViewById<EditText>(R.id.fechaNacimiento)
+        botonFecha = findViewById(R.id.elegirFecha)
+
+        val myCalendar = Calendar.getInstance()
+        val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, month)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateLable(myCalendar)
+        }
+
+        botonFecha.setOnClickListener {
+            DatePickerDialog(this, datePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show()
+        }
 
         val registrarse: Button = findViewById(R.id.botonRegister)
-
 
 
         registrarse.setOnClickListener {
@@ -46,6 +65,12 @@ class Register : AppCompatActivity() {
         }
 
 
+    }
+
+    fun updateLable(myCalendar : Calendar) {
+        val myFormat = "yyyy-MM-dd"
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        fechaNacimiento.setText(sdf.format(myCalendar.time))
     }
 
     fun validacionDatos(registerNombreUsuario:EditText, password:EditText, repiteContrasena:EditText, email:EditText, fechaNacimiento:EditText) {
