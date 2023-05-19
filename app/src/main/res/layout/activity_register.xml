@@ -89,7 +89,7 @@
         android:textColor="@color/white"
         android:backgroundTint="@color/orange"/>
 
-    <EditText
+    <TextView
         android:id="@+id/fechaNacimiento"
         android:layout_width="230dp"
         android:layout_height="50dp"

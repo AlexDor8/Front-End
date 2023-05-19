@@ -4,10 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.basketballcoach.model.Usuario
@@ -28,7 +25,7 @@ import java.util.Calendar
 class Register : AppCompatActivity() {
 
     lateinit var botonFecha: ImageView
-    lateinit var fechaNacimiento: EditText
+    lateinit var fechaNacimiento: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +70,7 @@ class Register : AppCompatActivity() {
         fechaNacimiento.setText(sdf.format(myCalendar.time))
     }
 
-    fun validacionDatos(registerNombreUsuario:EditText, password:EditText, repiteContrasena:EditText, email:EditText, fechaNacimiento:EditText) {
+    fun validacionDatos(registerNombreUsuario:EditText, password:EditText, repiteContrasena:EditText, email:EditText, fechaNacimiento:TextView) {
         val nombreUsuario = registerNombreUsuario.text.toString()
         val contrasena = password.text.toString()
         val repitePassword = repiteContrasena.text.toString()
