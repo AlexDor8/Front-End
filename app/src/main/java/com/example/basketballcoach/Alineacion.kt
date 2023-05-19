@@ -48,13 +48,6 @@ class Alineacion : AppCompatActivity() {
         conexionEscolta()
         conexionAlaPivot()
         conexionPivot()
-
-        confSpinnerBase()
-        confSpinnerAlero()
-        confSpinnerEscolta()
-        confSpinnerAlapivot()
-        confSpinnerPivot()
-
     }
 
     private fun confSpinnerBase() {
@@ -66,7 +59,7 @@ class Alineacion : AppCompatActivity() {
         )
 
         spinnerBase.adapter = adaptador
-
+        spinnerBase.setSelection(0)
     }
 
     private fun confSpinnerAlero() {
@@ -78,6 +71,7 @@ class Alineacion : AppCompatActivity() {
         )
 
         spinnerAlero.adapter = adaptador
+        spinnerAlero.setSelection(0)
     }
 
     private fun confSpinnerEscolta() {
@@ -89,6 +83,7 @@ class Alineacion : AppCompatActivity() {
         )
 
         spinnerEscolta.adapter = adaptador
+        spinnerEscolta.setSelection(0)
     }
 
     private fun confSpinnerAlapivot() {
@@ -99,6 +94,7 @@ class Alineacion : AppCompatActivity() {
             android.R.layout.simple_spinner_dropdown_item
         )
         spinnerAlapivot.adapter = adaptador
+        spinnerAlapivot.setSelection(0)
     }
 
     private fun confSpinnerPivot() {
@@ -109,6 +105,7 @@ class Alineacion : AppCompatActivity() {
             android.R.layout.simple_spinner_dropdown_item
         )
         spinnerPivot.adapter = adaptador
+        spinnerPivot.setSelection(0)
     }
 
     private fun conexion() {
@@ -125,6 +122,7 @@ class Alineacion : AppCompatActivity() {
                     listaJugadoresNombreBase.clear();
                     listaJugadoresNombreBase.addAll(nuevosJugadores)
                     println(listaJugadoresNombreBase)
+                    confSpinnerBase()
                 }
             }
         }
@@ -144,6 +142,7 @@ class Alineacion : AppCompatActivity() {
                     listaJugadoresNombreAlero.clear();
                     listaJugadoresNombreAlero.addAll(nuevosJugadores)
                     println(listaJugadoresNombreAlero)
+                    confSpinnerAlero()
                 }
             }
         }
@@ -163,6 +162,7 @@ class Alineacion : AppCompatActivity() {
                     listaJugadoresNombreEscolta.clear();
                     listaJugadoresNombreEscolta.addAll(nuevosJugadores)
                     println(listaJugadoresNombreEscolta)
+                    confSpinnerEscolta()
                 }
             }
         }
@@ -182,6 +182,7 @@ class Alineacion : AppCompatActivity() {
                     listaJugadoresNombreAlaPivot.clear();
                     listaJugadoresNombreAlaPivot.addAll(nuevosJugadores)
                     println(listaJugadoresNombreAlaPivot)
+                    confSpinnerAlapivot()
                 }
             }
         }
@@ -201,6 +202,7 @@ class Alineacion : AppCompatActivity() {
                     listaJugadoresNombrePivot.clear();
                     listaJugadoresNombrePivot.addAll(nuevosJugadores)
                     println(listaJugadoresNombrePivot)
+                    confSpinnerPivot()
                 }
             }
         }
