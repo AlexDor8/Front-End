@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomNav"
-        />
+        >
+
+    </FrameLayout>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -27,6 +29,16 @@
         app:menu="@drawable/items_toolbar"
         app:backgroundTint="@color/orange3"
         android:scrollIndicators="left"/>
+
+    <ImageView
+        android:id="@+id/elegirFechaProfile"
+        android:layout_width="51dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintEnd_toStartOf="@+id/editTextFecha"
+        app:layout_constraintTop_toBottomOf="@+id/emailText"
+        app:srcCompat="@drawable/calendario" />
 
     <ImageView
         android:id="@+id/fotoPerfil"
@@ -158,22 +170,20 @@
         app:layout_constraintTop_toBottomOf="@+id/editFoto"
         app:srcCompat="@drawable/guardarfoto" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTextFecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginEnd="9dp"
+        android:layout_width="208dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/orange"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="Name"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/buttonFecha"
-        app:layout_constraintStart_toEndOf="@+id/textViewFecha"
-        app:layout_constraintTop_toBottomOf="@+id/emailTexto"
-        android:backgroundTint="@color/orange"
-        android:textColor="@color/white"/>
+        app:layout_constraintTop_toBottomOf="@+id/emailTexto" />
 
     <ImageButton
         android:id="@+id/buttonFecha"
@@ -189,16 +199,6 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonEmail"
         app:srcCompat="@drawable/editar" />
 
-    <TextView
-        android:id="@+id/textViewFecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"
-        android:text="Fecha \n de nacimiento"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailText"
-        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/cambiarContrasena"

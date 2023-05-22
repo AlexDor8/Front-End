@@ -1,5 +1,6 @@
 package com.example.basketballcoach
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -33,6 +34,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class Profile : AppCompatActivity() {
@@ -50,6 +53,10 @@ class Profile : AppCompatActivity() {
     lateinit var imagen: ImageView
 
     lateinit var bottomNav : BottomNavigationView
+
+    lateinit var botonCambiarFecha: ImageView
+
+    lateinit var fechaNacimiento: TextView
 
 
 
@@ -94,17 +101,34 @@ class Profile : AppCompatActivity() {
 
         val nombreA = findViewById<EditText>(R.id.nombreUsuario)
         val emailA = findViewById<EditText>(R.id.emailTexto)
-        val fechaNacimiento = findViewById<EditText>(R.id.editTextFecha)
+        fechaNacimiento = findViewById(R.id.editTextFecha)
         val botonNombre = findViewById<ImageButton>(R.id.editName)
         val botonEmail = findViewById<ImageButton>(R.id.buttonEmail)
         val botonFecha = findViewById<ImageButton>(R.id.buttonFecha)
         val botonContra = findViewById<Button>(R.id.cambiarContrasena)
+
+        botonCambiarFecha = findViewById(R.id.elegirFechaProfile)
+
+        val myCalendar = java.util.Calendar.getInstance()
+        val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            myCalendar.set(java.util.Calendar.YEAR, year)
+            myCalendar.set(java.util.Calendar.MONTH, month)
+            myCalendar.set(java.util.Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateLable(myCalendar)
+        }
+
+        botonCambiarFecha.setOnClickListener {
+            DatePickerDialog(this, datePicker, myCalendar.get(java.util.Calendar.YEAR), myCalendar.get(
+                java.util.Calendar.MONTH), myCalendar.get(java.util.Calendar.DAY_OF_MONTH)).show()
+        }
 
         botonImagen = findViewById(R.id.editFoto)
         botonImagen.setOnClickListener {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
         imagen = findViewById(R.id.fotoPerfil)
+
+
 
 
         conexion(Globals.loginInformation.nombre, Globals.loginInformation.contraseña, nombreA, emailA, fechaNacimiento, botonNombre, botonEmail, botonFecha, botonContra)
@@ -115,14 +139,15 @@ class Profile : AppCompatActivity() {
 
     }
 
-    private  fun loadFragment(fragment: Fragment){
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container,fragment)
-        transaction.commit()
+    fun updateLable(myCalendar : java.util.Calendar) {
+        val myFormat = "yyyy-MM-dd"
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        fechaNacimiento.setText(sdf.format(myCalendar.time))
     }
 
 
-    fun conexion(nombre: String, contraseña: String, nombreA:EditText, emailA:EditText, fechaNacimiento:EditText, botonNombre:ImageButton, botonEmail: ImageButton, botonFecha: ImageButton, botonContra: Button) {
+
+    fun conexion(nombre: String, contraseña: String, nombreA:EditText, emailA:EditText, fechaNacimiento:TextView, botonNombre:ImageButton, botonEmail: ImageButton, botonFecha: ImageButton, botonContra: Button) {
         CoroutineScope(Dispatchers.IO).launch {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -137,7 +162,7 @@ class Profile : AppCompatActivity() {
                         Globals.usuario = usuario
                         nombreA.setText(usuario.nombre)
                         emailA.setText(usuario.email)
-                        fechaNacimiento.setText((usuario.fechaNacimiento))
+                        fechaNacimiento.text = (usuario.fechaNacimiento)
                         //MyAppGlideModule.with(imagen.context).load(usuario.foto).placeholder(R.drawable.usuario).fitCenter().into(imagen)
                         with(imagen.context).load(usuario.foto).into(imagen)
                         botonNombre.setOnClickListener {
