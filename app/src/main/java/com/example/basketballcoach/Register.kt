@@ -89,15 +89,18 @@ class Register : AppCompatActivity() {
             Toast.makeText(applicationContext, "Los campos están vacíos", Toast.LENGTH_LONG).show();
         }else {
             var userExiste = usuarioExiste(registerNombreUsuario, nombreUsuario, contrasena, mail, nacimiento)
+            var emailExiste = emailExiste(email, nombreUsuario, contrasena, mail, nacimiento)
             println("Este usuario existe?$userExiste")
+            println("Este gmail existe?$emailExiste")
             if (contrasena != repitePassword) {
                 repiteContrasena.error = "Las contraseñas no coinciden"
             }else if (contrasena.length<8) {
                 password.error = "La contraseña tiene que tenir mínimo 8 caracteres"
-
             }else if (!emailRegex.toRegex().matches(mail)){
                 email.error = "Introduce un email correcto"
-            }else if(userExiste){
+            }else if(emailExiste) {
+                email.error = "Este email ya existe"
+            } else if(userExiste){
                 registerNombreUsuario.error = "Este usuario ya existe"
             }else {
                 conexionRegistro(nombreUsuario, contrasena, mail, nacimiento)
@@ -155,6 +158,33 @@ class Register : AppCompatActivity() {
             }
         }
         return usuarioExiste
+    }
+
+    fun emailExiste(email: EditText, nombreUsuario:String, contrasena:String, mail:String, nacimiento: String) :Boolean {
+        var emailExiste = false
+        CoroutineScope(Dispatchers.IO).launch {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+            val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/")
+                .addConverterFactory(
+                    GsonConverterFactory.create()
+                ).client(client).build()
+            var respuesta = conexion.create(APIService::class.java)
+                .mailExist("baloncesto/exEmail", Usuario(0, nombreUsuario, contrasena, mail, nacimiento, ""))
+            withContext(Dispatchers.Main) {
+                if(respuesta.isSuccessful) {
+                    if (respuesta.body() == true) {
+                        emailExiste = true;
+                        email.error = "Este email ya existe"
+                        println("Este email existe: $emailExiste")
+                    }
+                }else {
+                    respuesta.errorBody()?.string()
+                }
+            }
+        }
+        return emailExiste
     }
 
 

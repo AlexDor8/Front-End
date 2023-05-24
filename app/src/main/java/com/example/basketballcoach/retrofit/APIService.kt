@@ -23,7 +23,7 @@ interface APIService {
     suspend fun userExist(@Url url: String, @Body usuario: Usuario) : Response<Boolean>
 
     @POST
-    suspend fun mailExist(@Url url: String, @Body mail: String) : Response<Boolean>
+    suspend fun mailExist(@Url url: String, @Body usuario: Usuario) : Response<Boolean>
 
     @POST
     suspend fun getUserData(@Url url: String, @Body loginInformation: LoginInformation): Response<Usuario>
