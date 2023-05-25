@@ -85,4 +85,10 @@ interface APIService {
 
     @GET
     suspend fun getFoto(@Url url: String): Response<Feedback>
+
+    @DELETE
+    suspend fun eliminarJugador(@Url url: String): Response<Feedback>
+
+    @DELETE
+    suspend fun eliminarEquipo(@Url url: String): Response<Feedback>
 }

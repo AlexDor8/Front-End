@@ -6,7 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.basketballcoach.R
 import com.example.basketballcoach.model.Jugador
 
-class JugadoresAdapter(val listJugadores: List<Jugador>, private val onClickListener:(Jugador) -> Unit): RecyclerView.Adapter<JugadoresViewHolder>() {
+class JugadoresAdapter(
+    val listJugadores: List<Jugador>,
+    private val onClickListener: (Jugador) -> Unit,
+    private val onClickDeleted:(Int) -> Unit
+) : RecyclerView.Adapter<JugadoresViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JugadoresViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -15,7 +19,7 @@ class JugadoresAdapter(val listJugadores: List<Jugador>, private val onClickList
 
     override fun onBindViewHolder(holder: JugadoresViewHolder, position: Int) {
         val item = listJugadores[position]
-        holder.itemPorListado(item, onClickListener)
+        holder.itemPorListado(item, onClickListener, onClickDeleted)
     }
 
     override fun getItemCount(): Int {

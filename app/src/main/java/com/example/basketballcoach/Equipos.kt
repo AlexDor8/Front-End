@@ -27,16 +27,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 class Equipos : AppCompatActivity() {
 
     var listaEquipos = mutableListOf<Equipo>(
-        Equipo(1, "Golden State Warriors",1, ""),
-        Equipo(2, "Phoenix Suns",1, ""),
-        Equipo(3, "Orlando Magic",1, "")
+        Equipo(1, "Golden State Warriors", 1, ""),
+        Equipo(2, "Phoenix Suns", 1, ""),
+        Equipo(3, "Orlando Magic", 1, "")
     )
 
     private lateinit var equiposRvAdapter: EquiposAdapter
 
     lateinit var buttonEquipo: ImageButton
 
-    lateinit var bottomNav : BottomNavigationView
+    lateinit var bottomNav: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,8 +94,42 @@ class Equipos : AppCompatActivity() {
     private fun inicializacionRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerEquipos)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        equiposRvAdapter = EquiposAdapter(listaEquipos) { onItemSelected(it) }
+        equiposRvAdapter = EquiposAdapter(
+        listEquipos = listaEquipos,
+        onClickListener = { equipo -> onItemSelected(equipo) },
+        onClickDeleted = { onDeletedItem(it) }
+        )
         recyclerView.adapter = equiposRvAdapter
+    }
+
+    private fun onDeletedItem(position: Int) {
+        listaEquipos.removeAt(position)
+        equiposRvAdapter.notifyItemRemoved(position)
+        val equipo: Equipo = listaEquipos[position]
+        conexionEliminarEquipo(equipo)
+    }
+
+    private fun conexionEliminarEquipo(equipo: Equipo) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+            val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
+                GsonConverterFactory.create()
+            ).client(client).build()
+            var respuesta = conexion.create(APIService::class.java)
+                .eliminarEquipo("baloncesto/eliminarEquipo/${equipo.id}")
+            withContext(Dispatchers.Main) {
+                if (respuesta.isSuccessful) {
+                    println(respuesta.body())
+                    Toast.makeText(
+                        applicationContext,
+                        "El equipo ha sido eliminado con éxito!",
+                        Toast.LENGTH_LONG
+                    ).show();
+                }
+            }
+        }
     }
 
     private fun onItemSelected(equipo: Equipo) {
@@ -111,8 +145,10 @@ class Equipos : AppCompatActivity() {
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
             val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
-                GsonConverterFactory.create()).client(client).build()
-            var respuesta = conexion.create(APIService::class.java).getEquipos("baloncesto/getEquipos/${Globals.usuario.id}")
+                GsonConverterFactory.create()
+            ).client(client).build()
+            var respuesta = conexion.create(APIService::class.java)
+                .getEquipos("baloncesto/getEquipos/${Globals.usuario.id}")
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     val nuevosEquipos = respuesta.body() ?: emptyList()
@@ -128,7 +164,7 @@ class Equipos : AppCompatActivity() {
         var searchView = findViewById<SearchView>(R.id.searchViewEquipos);
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if(!query?.isNullOrEmpty()!!) {
+                if (!query?.isNullOrEmpty()!!) {
                     getEquiposFiltroNombre(query);
                 }
                 return true;
@@ -142,7 +178,7 @@ class Equipos : AppCompatActivity() {
         )
     }
 
-    private fun getEquiposFiltroNombre(query:String) {
+    private fun getEquiposFiltroNombre(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build()

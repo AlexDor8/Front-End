@@ -57,7 +57,7 @@ class Jugadores : AppCompatActivity() {
 
     private lateinit var jugadoresRvAdapter: JugadoresAdapter
 
-    lateinit var bottomNav : BottomNavigationView
+    lateinit var bottomNav: BottomNavigationView
     lateinit var buttonJugador: ImageButton
 
 
@@ -114,9 +114,19 @@ class Jugadores : AppCompatActivity() {
     private fun inicializacionRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerJugadores)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        jugadoresRvAdapter = JugadoresAdapter(listaJugadores) { onItemSelected(it) }
+        jugadoresRvAdapter = JugadoresAdapter(
+            listJugadores = listaJugadores,
+            onClickListener = { jugador -> onItemSelected(jugador) },
+            onClickDeleted = { onDeletedItem(it) }
+        )
         recyclerView.adapter = jugadoresRvAdapter
+    }
 
+    private fun onDeletedItem(position: Int) {
+        listaJugadores.removeAt(position)
+        jugadoresRvAdapter.notifyItemRemoved(position)
+        val jugador: Jugador = listaJugadores[position]
+        conexionEliminarJugador(jugador)
     }
 
     private fun onItemSelected(jugador: Jugador) {
@@ -126,14 +136,39 @@ class Jugadores : AppCompatActivity() {
         startActivity(intent);
     }
 
+    private fun conexionEliminarJugador(jugador: Jugador) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+            val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
+                GsonConverterFactory.create()
+            ).client(client).build()
+            var respuesta = conexion.create(APIService::class.java)
+                .eliminarJugador("baloncesto/eliminarJugador/${jugador.id}")
+            withContext(Dispatchers.Main) {
+                if (respuesta.isSuccessful) {
+                    println(respuesta.body())
+                    Toast.makeText(
+                        applicationContext,
+                        "El jugador ha sido eliminado con éxito!",
+                        Toast.LENGTH_LONG
+                    ).show();
+                }
+            }
+        }
+    }
+
     private fun conexion() {
         CoroutineScope(Dispatchers.IO).launch {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
             val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/").addConverterFactory(
-                GsonConverterFactory.create()).client(client).build()
-            var respuesta = conexion.create(APIService::class.java).getJugadores("baloncesto/getJugadores/${Globals.equipo.id}")
+                GsonConverterFactory.create()
+            ).client(client).build()
+            var respuesta = conexion.create(APIService::class.java)
+                .getJugadores("baloncesto/getJugadores/${Globals.equipo.id}")
             withContext(Dispatchers.Main) {
                 if (respuesta.isSuccessful) {
                     val nuevosJugadores = respuesta.body() ?: emptyList()
@@ -149,7 +184,7 @@ class Jugadores : AppCompatActivity() {
         var searchView = findViewById<SearchView>(R.id.searchViewJugadores);
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if(!query?.isNullOrEmpty()!!) {
+                if (!query?.isNullOrEmpty()!!) {
                     getJugadoresFiltroNombre(query);
                 }
                 return true;
@@ -163,7 +198,7 @@ class Jugadores : AppCompatActivity() {
         )
     }
 
-    private fun getJugadoresFiltroNombre(query:String) {
+    private fun getJugadoresFiltroNombre(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val conexion = Retrofit.Builder().baseUrl("http://10.0.2.2:8081/")
                 .addConverterFactory(GsonConverterFactory.create()).build()

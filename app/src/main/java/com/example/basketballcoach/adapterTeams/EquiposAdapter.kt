@@ -7,7 +7,12 @@ import com.example.basketballcoach.R
 import com.example.basketballcoach.model.Equipo
 
 
-class EquiposAdapter(val listEquipos: List<Equipo>, private val onClickListener:(Equipo) -> Unit): RecyclerView.Adapter<EquiposViewHolder>(){
+class EquiposAdapter(
+    val listEquipos: List<Equipo>,
+    private val onClickListener: (Equipo) -> Unit,
+    private val onClickDeleted: (Int) -> Unit
+) :
+    RecyclerView.Adapter<EquiposViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EquiposViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return EquiposViewHolder(layoutInflater.inflate(R.layout.item_equipo, parent, false))
@@ -15,7 +20,7 @@ class EquiposAdapter(val listEquipos: List<Equipo>, private val onClickListener:
 
     override fun onBindViewHolder(holder: EquiposViewHolder, position: Int) {
         val item = listEquipos[position]
-        holder.itemPorListado(item, onClickListener)
+        holder.itemPorListado(item, onClickListener, onClickDeleted)
     }
 
     override fun getItemCount(): Int {
