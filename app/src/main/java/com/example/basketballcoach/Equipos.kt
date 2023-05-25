@@ -103,10 +103,10 @@ class Equipos : AppCompatActivity() {
     }
 
     private fun onDeletedItem(position: Int) {
-        listaEquipos.removeAt(position)
-        equiposRvAdapter.notifyItemRemoved(position)
         val equipo: Equipo = listaEquipos[position]
         conexionEliminarEquipo(equipo)
+        listaEquipos.removeAt(position)
+        equiposRvAdapter.notifyItemRemoved(position)
     }
 
     private fun conexionEliminarEquipo(equipo: Equipo) {

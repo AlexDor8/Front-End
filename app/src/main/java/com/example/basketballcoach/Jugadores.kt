@@ -123,10 +123,10 @@ class Jugadores : AppCompatActivity() {
     }
 
     private fun onDeletedItem(position: Int) {
-        listaJugadores.removeAt(position)
-        jugadoresRvAdapter.notifyItemRemoved(position)
         val jugador: Jugador = listaJugadores[position]
         conexionEliminarJugador(jugador)
+        listaJugadores.removeAt(position)
+        jugadoresRvAdapter.notifyItemRemoved(position)
     }
 
     private fun onItemSelected(jugador: Jugador) {
